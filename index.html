@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/responsive.css">
+    <link rel="stylesheet" href="./style/theme.css">
+    <title>To-do List | Organize and Schedule your work faster!</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="toast-notification"></div>
+
+        <div class="app">
+
+            <div class="theme-switch">
+                <i class="fa fa-moon"></i>
+            </div>
+
+            <div class="header">
+                <h1>To-do List</h1>
+                <h2>Organize and Schedule your work faster!</h2>
+            </div>
+
+            <div class="input-form">
+                <div><input type="text" id="task-title-input" placeholder="Enter title" maxlength="40"></div>
+                <div><textarea type="text" id="task-desc-input" placeholder="Enter description"></textarea></div>
+                <div><button id="submit-task" onclick="addTask()">Add</button></div>
+            </div>
+
+            <div class="navbar">
+                <button id="important-task-nav">Important</button>
+                <button id="in-progress-task-nav">In progress</button>
+                <button id="completed-task-nav">Completed</button>
+                <button id="all-task-nav">All</button>
+            </div>
+
+            <div><p id="select-all">Select all</p></div>
+
+            <div class="task-list">
+                <div id="important-list"></div>
+                <div id="in-progress-list"></div>
+                <div id="completed-list"></div>
+                <div id="all-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+}
+
+.app {
+    margin: 0 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#task-title-input {
+    position: relative;
+    height: 3rem;
+}
+
+#task-desc-input {
+    height: 8rem;
+}
+
+#task-title-input::placeholder,
+#task-desc-input::placeholder {
+    font-size: 1.2em;
+}
+
+#submit-task {
+    padding: 15px 40px;
+    outline: none;
+    border: none;
+}
+.navbar {
+    display: flex;
+}
+.navbar button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 40px;
+}
+h1,
+h2 {
+    font-family: 'pt serif', serif;
+}
+
+h1 {
+    font-size: 2.75em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+input,
+textarea {
+    width: 600px;
+    padding: 10px;
+}
+
+textarea {
+    resize: vertical;
+}
+button {
+    font-size: 1em;
+}
