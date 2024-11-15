@@ -67,6 +67,7 @@ function addTask() {
     deleteBtn.classList.add('fa-solid', 'fa-trash');
     actionBtnWrap.appendChild(deleteBtn);
 
+    actionBtnWrap.classList.add('action-btn');
     newTask.appendChild(actionBtnWrap);
 
     // add task to task list
@@ -77,19 +78,19 @@ function addTask() {
     actionButtonFunction();
 }
 function showAllTask() {
-    allList.style.display = 'block';
+    allList.style.display = 'flex';
     importantList.style.display = 'none';
     inProgressList.style.display = 'none';
 }
 
 function showInProgressTask() {
-    inProgressList.style.display = 'block';
+    inProgressList.style.display = 'flex';
     importantList.style.display = 'none';
     allList.style.display = 'none';
 }
 
 function showImportantTask() {
-    importantList.style.display = 'block';
+    importantList.style.display = 'flex';
     allList.style.display = 'none';
     inProgressList.style.display = 'none';
 }
@@ -112,7 +113,7 @@ function actionButtonFunction() {
                 const oldDesc = task.querySelector('.task-desc');
                 const formWrap = document.createElement('div');
                 const buttonWrap = document.createElement('div')
-                const popupHeader = document.createElement('p');
+                const popupHeader = document.createElement('h2');
 
                 taskTitleInput.id = 'new-task-title';
                 taskDescInput.id = 'new-task-desc';
@@ -125,7 +126,7 @@ function actionButtonFunction() {
                 popupHeader.innerText = 'Edit Task';
                 formWrap.classList.add('form-wrap');
                 buttonWrap.classList.add('button-wrap');
-
+                
                 popupBoard.appendChild(popupHeader);
                 formWrap.appendChild(taskTitleInput);
                 formWrap.appendChild(taskDescInput);

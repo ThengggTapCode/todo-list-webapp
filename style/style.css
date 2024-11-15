@@ -11,15 +11,20 @@
 }
 
 .app {
-    margin: 0 50px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 0 100px;
 }
-
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .input-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
@@ -43,6 +48,7 @@
 }
 .navbar {
     display: flex;
+    justify-content: center;
 }
 .navbar button {
     background-color: transparent;
@@ -52,6 +58,23 @@
 .task-container {
     display: flex;
     width: 500px;
+}
+.task-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#important-list,
+#in-progress-list,
+#all-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#all-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 #popup-container {
     display: flex;
@@ -66,10 +89,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    gap: 40px;
     width: 600px;
-    height: 700px;
+    height: 600px;
     background-color: white;
     border-radius: 20px;
     position: relative;
@@ -90,11 +112,18 @@
     padding: 10px 40px;
 }
 #popup-board .form-wrap {
-    /* margin-top: 100px; */
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
-#popup-board p {
+#popup-board h2 {
+    font-family: 'open sans';
+    font-size: 3em;
+    margin-top: 100px;
+}
+#popup-board .button-wrap {
+    display: flex;
+    gap: 30px;
 }
 h1,
 h2 {
@@ -111,8 +140,9 @@ h2 {
 
 input,
 textarea {
-    width: 600px;
+    width: 500px;
     padding: 10px;
+    font-size: 1em;
 }
 
 textarea {
