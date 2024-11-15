@@ -18,6 +18,10 @@ function addTask() {
     const taskTitle = document.createElement('p');
     const taskDesc = document.createElement('p');
     const taskInfoWrap = document.createElement('div');
+    const editBtn = document.createElement('i');
+    const pinBtn = document.createElement('i');
+    const deleteBtn = document.createElement('i');
+    const actionBtnWrap = document.createElement('div');
 
     if (title.value === '') {
         untitledTask++;
@@ -51,6 +55,20 @@ function addTask() {
     newTask.appendChild(expandTask);
     newTask.classList.add('task-container');
 
+    // edit button
+    editBtn.classList.add('fa-solid', 'fa-pen-to-square');
+    actionBtnWrap.appendChild(editBtn);
+
+    // pin button
+    pinBtn.classList.add('fa-solid', 'fa-thumbtack');
+    actionBtnWrap.appendChild(pinBtn);
+
+    // delete button
+    deleteBtn.classList.add('fa-solid', 'fa-trash');
+    actionBtnWrap.appendChild(deleteBtn);
+
+    newTask.appendChild(actionBtnWrap);
+
     // add task to task list
     allList.appendChild(newTask);
     inProgressList.appendChild(newTask.cloneNode(true));
@@ -74,42 +92,6 @@ function showImportantTask() {
     importantList.style.display = 'block';
     allList.style.display = 'none';
     inProgressList.style.display = 'none';
-}
-function toggleSelect(task) {
-    if (!selectingAll) {
-        const editBtn = document.createElement('i');
-        const pinBtn = document.createElement('i');
-        const deleteBtn = document.createElement('i');
-        const actionBtnWrap = document.createElement('div');
-
-        // edit button
-        editBtn.classList.add('fa-solid', 'fa-pen-to-square');
-        actionBtnWrap.appendChild(editBtn);
-
-        // pin button
-        pinBtn.classList.add('fa-solid', 'fa-thumbtack');
-        actionBtnWrap.appendChild(pinBtn);
-
-        // delete button
-        deleteBtn.classList.add('fa-solid', 'fa-trash');
-        actionBtnWrap.appendChild(deleteBtn);
-
-        actionBtnWrap.classList.add('action-button');
-        task.appendChild(actionBtnWrap);
-    } else {
-        const actionBtnWrap = task.querySelector('.action-button');
-        if (actionBtnWrap)
-            actionBtnWrap.remove();
-    }
-    console.log(true)
-}
-function selectAll() {
-    const tasks = document.querySelectorAll('.task-container');
-    tasks.forEach(task => {
-        toggleSelect(task);
-    });
-
-    selectingAll = !selectingAll;
 }
 
 function actionButtonFunction() {
