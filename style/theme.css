@@ -2,3 +2,20 @@
     background-color: rgba(251, 251, 255, 1);
     color: rgba(13, 1, 6, 1);
 }
+button {
+    background-color: rgba(53, 38, 167, 1);
+    color: rgba(251, 251, 255, 1);
+}
+
+#cancel-new-info {
+    background-color: transparent;
+    color: rgba(53, 38, 167, 1);
+}
+
+.navbar button {
+    color: rgba(13, 1, 6, 1);
+    border-color: rgba(13, 1, 6, 1);
+}
+.task-container {
+    background-color: rgba(230, 230, 230, 1);
+}

@@ -126,7 +126,8 @@ function actionButtonFunction() {
                 popupHeader.innerText = 'Edit Task';
                 formWrap.classList.add('form-wrap');
                 buttonWrap.classList.add('button-wrap');
-                
+                popupBoard.style.height = '400px';
+                popupHeader.style.marginTop = '30px'
                 popupBoard.appendChild(popupHeader);
                 formWrap.appendChild(taskTitleInput);
                 formWrap.appendChild(taskDescInput);
