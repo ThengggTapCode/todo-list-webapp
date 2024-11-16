@@ -127,7 +127,8 @@ function actionButtonFunction() {
                 formWrap.classList.add('form-wrap');
                 buttonWrap.classList.add('button-wrap');
                 popupBoard.style.height = '400px';
-                popupHeader.style.marginTop = '30px'
+                popupHeader.style.marginTop = '30px';
+
                 popupBoard.appendChild(popupHeader);
                 formWrap.appendChild(taskTitleInput);
                 formWrap.appendChild(taskDescInput);
@@ -161,7 +162,34 @@ function actionButtonFunction() {
                     buttonWrap.remove();
                     popupHeader.remove();
                     popupContainer.style.display = 'none';
+
+                    return;
                 });
+            }
+            // pin task
+            if (clickedElement.classList.contains('fa-thumbtack')) {
+
+                const allTask = Array.from(allList.children).find(t => t.isEqualNode(task));
+                const inProgressTask = Array.from(inProgressList.children).find(t => t.isEqualNode(task));
+
+                if (allTask) {
+                    allList.removeChild(allTask);
+                    const pinBtn = allTask.querySelector('.fa-thumbtack');
+                    pinBtn.classList.add('fa-thumbtack-slash');
+                    pinBtn.classList.remove('fa-thumbtack');
+                    allTask.classList.add('pinned');
+                    allList.insertBefore(allTask, allList.firstChild);
+                }
+                if (inProgressTask) {
+                    inProgressList.removeChild(inProgressTask);
+                    const pinBtn = inProgressTask.querySelector('.fa-thumbtack');
+                    pinBtn.classList.add('fa-thumbtack-slash');
+                    pinBtn.classList.remove('fa-thumbtack');
+                    inProgressTask.classList.add('pinned');
+                    inProgressList.insertBefore(inProgressTask, inProgressList.firstChild);
+                }
+                importantList.appendChild(allTask.cloneNode(true));
+                return;
             }
         })
     })
