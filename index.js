@@ -1,6 +1,8 @@
 const taskList = document.getElementById('task-list');
 const popupContainer = document.getElementById('popup-container');
 const popupBoard = document.getElementById('popup-board');
+const inputs = document.querySelectorAll('input');
+const textareas = document.querySelectorAll('textarea')
 
 let untitledTask = 0;
 
@@ -19,9 +21,10 @@ function addTask() {
     if (title.value === '') {
         untitledTask++;
         taskTitle.innerText = `Untitled task #${untitledTask}`
-    } else
+    } else {
+        untitledTask = 0;
         taskTitle.innerText = title.value.trim();
-
+    }
     if (desc.value === '')
         taskDesc.innerText = 'No description';
     else
@@ -67,10 +70,19 @@ function addTask() {
     taskList.appendChild(newTask);
 
 }
+function countInputLength(inputValue, display) {
+    const count = inputValue.length;
+    display.innerText = `${count}/50`;
+}
+function countTextareaLength(textareaValue, display) {
+    const count = textareaValue.length;
+    display.innerText = `${count}/500`;
+}
 taskList.addEventListener('click', event => {
     const clickedElement = event.target;
     const taskContainer = clickedElement.parentElement.parentElement;
 
+    // edit task
     if (clickedElement.classList.contains('fa-pen-to-square')) {
         popupContainer.style.display = 'flex';
 
@@ -123,16 +135,50 @@ taskList.addEventListener('click', event => {
             const newDesc = taskDescInput.value.trim();
 
             if (newTitle !== '' || newDesc !== '') {
+                untitledTask = 0;
                 oldTitle.textContent = newTitle;
                 oldDesc.textContent = newDesc;
-
             }
             formWrap.remove();
             buttonWrap.remove();
             popupHeader.remove();
             popupContainer.style.display = 'none';
 
-            return;
         });
     }
-})
+
+    // pin/unpin task
+    else if (clickedElement.classList.contains('fa-thumbtack') || clickedElement.classList.contains('fa-thumbtack-slash')) {
+        if (clickedElement.classList.contains('fa-thumbtack'))
+            taskList.insertBefore(taskContainer, taskList.firstChild);
+
+        clickedElement.classList.toggle('fa-thumbtack');
+        clickedElement.classList.toggle('fa-thumbtack-slash');
+
+        taskContainer.classList.toggle('pinned');
+    }
+
+    // delete task
+    else if (clickedElement.classList.contains('fa-trash'))
+        taskContainer.remove();
+
+    getInput();
+    getTextarea();
+});
+function getInput() {
+    inputs.forEach(input => {
+        const container = input.parentElement;
+        countInputLength(input.value, container.querySelector('p'));
+        input.addEventListener('keydown', () => countInputLength(input.value, container.querySelector('p')));
+    });
+}
+function getTextarea() {
+    textareas.forEach(textarea => {
+        const container = textarea.parentElement;
+
+        countTextareaLength(textarea.value, container.querySelector('p'));
+        textarea.addEventListener('keydown', () => countTextareaLength(textarea.value, container.querySelector('p')));
+    });
+}
+getInput();
+getTextarea()

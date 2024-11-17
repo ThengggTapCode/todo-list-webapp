@@ -26,7 +26,7 @@
                 <i class="fa-solid fa-xmark" id="close-popup"></i>
             </div>
         </div>
-        
+
         <div class="app">
 
             <div class="theme-switch">
@@ -40,15 +40,29 @@
             </div>
 
             <div class="input-form">
-                <div><input type="text" id="task-title-input" placeholder="Enter title" maxlength="40"></div>
-                <div><textarea type="text" id="task-desc-input" placeholder="Enter description"></textarea></div>
-                <div><button id="submit-task" onclick="addTask()">Add</button></div>
+                <div>
+                    <input type="text" id="task-title-input" placeholder="Enter title" maxlength="50" autocomplete="off">
+                    <p class="length-count"></p>
+                </div>
+
+                <div>
+                    <textarea type="text" id="task-desc-input" placeholder="Enter description"></textarea>
+                    <p class="textarea-length-count"></p>
+                </div>
+                    
+                <div>
+                    <button id="submit-task" onclick="addTask()">Add</button>
+                </div>
             </div>
 
             <div class="seperate-bar"></div>
 
             <div class="input-form">
-                <input type="text" id="find-task-input" placeholder="Find task">
+                <div>
+                    <input type="text" id="find-task-input" placeholder="Find task" maxlength="50">
+                    <p class="length-count"></p>
+                </div>
+
                 <button id="find-task">Find</button>
             </div>
 

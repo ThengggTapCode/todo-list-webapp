@@ -72,11 +72,24 @@
     gap: 20px;
 }
 .seperate-bar {
-    width: 400px;
+    width: 500px;
     height: 4px;
     background-color: black;
 }
-
+.input-form div:nth-child(1),
+.input-form div:nth-child(2) {
+    position: relative;
+}
+.length-count {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+.textarea-length-count {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
 #popup-container {
     display: flex;
     justify-content: center;
@@ -85,6 +98,7 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
+    z-index: 1;
 }
 #popup-board {
     display: flex;
@@ -147,6 +161,7 @@ textarea {
 
 textarea {
     resize: vertical;
+    max-width: 500px;
 }
 button {
     font-size: 1.5em;
