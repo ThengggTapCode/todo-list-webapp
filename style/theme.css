@@ -1,7 +1,8 @@
-.container, input {
+html {
     background-color: rgba(251, 251, 255, 1);
     color: rgba(13, 1, 6, 1);
 }
+
 button {
     background-color: rgba(53, 38, 167, 1);
     color: rgba(251, 251, 255, 1);
@@ -12,10 +13,10 @@ button {
     color: rgba(53, 38, 167, 1);
 }
 
-.navbar button {
-    color: rgba(13, 1, 6, 1);
-    border-color: rgba(13, 1, 6, 1);
-}
 .task-container {
     background-color: rgba(230, 230, 230, 1);
+}
+
+#popup-board {
+    box-shadow: 0 15px 25px rgba(100, 100, 100, 1);
 }
