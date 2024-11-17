@@ -1,14 +1,7 @@
-const importantList = document.getElementById('important-list');
-const inProgressList = document.getElementById('in-progress-list');
-const allList = document.getElementById('all-list');
+const taskList = document.getElementById('task-list');
 const popupContainer = document.getElementById('popup-container');
 const popupBoard = document.getElementById('popup-board');
 
-inProgressList.style.display = 'none';
-allList.style.display = 'none';
-
-let selectingTask = false;
-let selectingAll = false;
 let untitledTask = 0;
 
 function addTask() {
@@ -71,126 +64,75 @@ function addTask() {
     newTask.appendChild(actionBtnWrap);
 
     // add task to task list
-    allList.appendChild(newTask);
-    inProgressList.appendChild(newTask.cloneNode(true));
+    taskList.appendChild(newTask);
 
-    showAllTask();
-    actionButtonFunction();
 }
-function showAllTask() {
-    allList.style.display = 'flex';
-    importantList.style.display = 'none';
-    inProgressList.style.display = 'none';
-}
+taskList.addEventListener('click', event => {
+    const clickedElement = event.target;
+    const taskContainer = clickedElement.parentElement.parentElement;
 
-function showInProgressTask() {
-    inProgressList.style.display = 'flex';
-    importantList.style.display = 'none';
-    allList.style.display = 'none';
-}
+    if (clickedElement.classList.contains('fa-pen-to-square')) {
+        popupContainer.style.display = 'flex';
 
-function showImportantTask() {
-    importantList.style.display = 'flex';
-    allList.style.display = 'none';
-    inProgressList.style.display = 'none';
-}
+        const taskTitleInput = document.createElement('input');
+        const taskDescInput = document.createElement('textarea');
+        const submitButton = document.createElement('button');
+        const cancelButton = document.createElement('button')
+        const oldTitle = taskContainer.querySelector('.task-title');
+        const oldDesc = taskContainer.querySelector('.task-desc');
+        const formWrap = document.createElement('div');
+        const buttonWrap = document.createElement('div')
+        const popupHeader = document.createElement('h2');
 
-function actionButtonFunction() {
-    document.querySelectorAll('.task-container').forEach(task => {
-        task.addEventListener('click', event => {
+        taskTitleInput.id = 'new-task-title';
+        taskDescInput.id = 'new-task-desc';
+        taskTitleInput.placeholder = 'Enter new title';
+        taskDescInput.placeholder = 'Enter new description';
+        submitButton.id = 'submit-new-info';
+        submitButton.innerText = 'Submit';
+        cancelButton.id = 'cancel-new-info';
+        cancelButton.innerText = 'Cancel';
+        popupHeader.innerText = 'Edit Task';
+        formWrap.classList.add('form-wrap');
+        buttonWrap.classList.add('button-wrap');
+        popupBoard.style.height = '400px';
+        popupHeader.style.marginTop = '30px';
 
-            const clickedElement = event.target;
+        popupBoard.appendChild(popupHeader);
+        formWrap.appendChild(taskTitleInput);
+        formWrap.appendChild(taskDescInput);
+        buttonWrap.appendChild(submitButton);
+        buttonWrap.appendChild(cancelButton);
+        popupBoard.appendChild(formWrap);
+        popupBoard.appendChild(buttonWrap);
 
-            // edit task
-            if (clickedElement.classList.contains('fa-pen-to-square')) {
-                popupContainer.style.display = 'flex';
-
-                const taskTitleInput = document.createElement('input');
-                const taskDescInput = document.createElement('textarea');
-                const submitButton = document.createElement('button');
-                const cancelButton = document.createElement('button')
-                const oldTitle = task.querySelector('.task-title');
-                const oldDesc = task.querySelector('.task-desc');
-                const formWrap = document.createElement('div');
-                const buttonWrap = document.createElement('div')
-                const popupHeader = document.createElement('h2');
-
-                taskTitleInput.id = 'new-task-title';
-                taskDescInput.id = 'new-task-desc';
-                taskTitleInput.placeholder = 'Enter new title';
-                taskDescInput.placeholder = 'Enter new description';
-                submitButton.id = 'submit-new-info';
-                submitButton.innerText = 'Submit';
-                cancelButton.id = 'cancel-new-info';
-                cancelButton.innerText = 'Cancel';
-                popupHeader.innerText = 'Edit Task';
-                formWrap.classList.add('form-wrap');
-                buttonWrap.classList.add('button-wrap');
-                popupBoard.style.height = '400px';
-                popupHeader.style.marginTop = '30px';
-
-                popupBoard.appendChild(popupHeader);
-                formWrap.appendChild(taskTitleInput);
-                formWrap.appendChild(taskDescInput);
-                buttonWrap.appendChild(submitButton);
-                buttonWrap.appendChild(cancelButton);
-                popupBoard.appendChild(formWrap);
-                popupBoard.appendChild(buttonWrap);
-
-                cancelButton.addEventListener('click', () => {
-                    formWrap.remove();
-                    buttonWrap.remove();
-                    popupHeader.remove();
-                    popupContainer.style.display = 'none';
-                });
-                document.querySelector('.fa-xmark').addEventListener('click', () => {
-                    formWrap.remove();
-                    buttonWrap.remove();
-                    popupHeader.remove();
-                    popupContainer.style.display = 'none';
-                })
-                submitButton.addEventListener('click', () => {
-                    const newTitle = taskTitleInput.value.trim();
-                    const newDesc = taskDescInput.value.trim();
-
-                    if (newTitle !== '' || newDesc !== '') {
-                        oldTitle.textContent = newTitle;
-                        oldDesc.textContent = newDesc;
-
-                    }
-                    formWrap.remove();
-                    buttonWrap.remove();
-                    popupHeader.remove();
-                    popupContainer.style.display = 'none';
-
-                    return;
-                });
-            }
-            // pin task
-            if (clickedElement.classList.contains('fa-thumbtack')) {
-
-                const allTask = Array.from(allList.children).find(t => t.isEqualNode(task));
-                const inProgressTask = Array.from(inProgressList.children).find(t => t.isEqualNode(task));
-
-                if (allTask) {
-                    allList.removeChild(allTask);
-                    const pinBtn = allTask.querySelector('.fa-thumbtack');
-                    pinBtn.classList.add('fa-thumbtack-slash');
-                    pinBtn.classList.remove('fa-thumbtack');
-                    allTask.classList.add('pinned');
-                    allList.insertBefore(allTask, allList.firstChild);
-                }
-                if (inProgressTask) {
-                    inProgressList.removeChild(inProgressTask);
-                    const pinBtn = inProgressTask.querySelector('.fa-thumbtack');
-                    pinBtn.classList.add('fa-thumbtack-slash');
-                    pinBtn.classList.remove('fa-thumbtack');
-                    inProgressTask.classList.add('pinned');
-                    inProgressList.insertBefore(inProgressTask, inProgressList.firstChild);
-                }
-                importantList.appendChild(allTask.cloneNode(true));
-                return;
-            }
+        cancelButton.addEventListener('click', () => {
+            formWrap.remove();
+            buttonWrap.remove();
+            popupHeader.remove();
+            popupContainer.style.display = 'none';
+        });
+        document.querySelector('.fa-xmark').addEventListener('click', () => {
+            formWrap.remove();
+            buttonWrap.remove();
+            popupHeader.remove();
+            popupContainer.style.display = 'none';
         })
-    })
-}
+        submitButton.addEventListener('click', () => {
+            const newTitle = taskTitleInput.value.trim();
+            const newDesc = taskDescInput.value.trim();
+
+            if (newTitle !== '' || newDesc !== '') {
+                oldTitle.textContent = newTitle;
+                oldDesc.textContent = newDesc;
+
+            }
+            formWrap.remove();
+            buttonWrap.remove();
+            popupHeader.remove();
+            popupContainer.style.display = 'none';
+
+            return;
+        });
+    }
+})
