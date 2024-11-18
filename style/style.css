@@ -38,10 +38,6 @@
     height: 8rem;
 }
 
-#task-title-input::placeholder,
-#task-desc-input::placeholder {
-    font-size: 1.2em;
-}
 
 #submit-task {
     padding: 15px 40px;
@@ -160,7 +156,9 @@ textarea {
 
 textarea {
     resize: vertical;
-    max-width: 500px;
+    max-height: 230px;
+    min-height: 48px;
+    height: 48px;
 }
 button {
     font-size: 1.5em;
@@ -168,4 +166,8 @@ button {
     border-radius: 5px;
     font-weight: bold;
     padding: 10px 40px;
+}
+input::placeholder,
+textarea::placeholder {
+    font-size: 1.2em;
 }

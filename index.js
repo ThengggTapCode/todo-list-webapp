@@ -2,7 +2,7 @@ const taskList = document.getElementById('task-list');
 const popupContainer = document.getElementById('popup-container');
 const popupBoard = document.getElementById('popup-board');
 const inputs = document.querySelectorAll('input');
-const textareas = document.querySelectorAll('textarea')
+const textareas = document.querySelectorAll('textarea');
 
 let untitledTask = 0;
 
@@ -168,16 +168,18 @@ taskList.addEventListener('click', event => {
 function getInput() {
     inputs.forEach(input => {
         const container = input.parentElement;
-        countInputLength(input.value, container.querySelector('p'));
-        input.addEventListener('keydown', () => countInputLength(input.value, container.querySelector('p')));
+        const display = container.querySelector('p');
+        countInputLength(input.value, display);
+        input.addEventListener('input', () => countInputLength(input.value, display));
     });
 }
 function getTextarea() {
     textareas.forEach(textarea => {
         const container = textarea.parentElement;
+        const display = container.querySelector('p');
 
-        countTextareaLength(textarea.value, container.querySelector('p'));
-        textarea.addEventListener('keydown', () => countTextareaLength(textarea.value, container.querySelector('p')));
+        countTextareaLength(textarea.value, display);
+        textarea.addEventListener('input', () => countTextareaLength(textarea.value, display));
     });
 }
 getInput();
