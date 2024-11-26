@@ -18,6 +18,8 @@ function addTask() {
     const deleteBtn = document.createElement('i');
     const actionBtnWrap = document.createElement('div');
 
+    newTask.classList.add('task-container');
+
     if (title.value === '') {
         untitledTask++;
         taskTitle.innerText = `Untitled task #${untitledTask}`
@@ -25,10 +27,8 @@ function addTask() {
         untitledTask = 0;
         taskTitle.innerText = title.value.trim();
     }
-    if (desc.value === '')
-        taskDesc.innerText = 'No description';
-    else
-        taskDesc.innerText = desc.value.trim();
+
+    taskDesc.innerText = desc.value === '' ? 'No description' : desc.value.trim();
 
     // check task button
     const checkTask = document.createElement('i');
@@ -40,6 +40,7 @@ function addTask() {
     taskDesc.classList.add('task-desc');
     taskInfoWrap.appendChild(taskTitle);
     taskInfoWrap.appendChild(taskDesc);
+    taskDesc.style.display = 'none';
 
     // add task info
     taskInfoWrap.classList.add('task-info');
@@ -48,9 +49,8 @@ function addTask() {
     // expand task button
     const expandTask = document.createElement('i');
     expandTask.classList.add('fa-solid', 'fa-angle-down');
-    newTask.appendChild(expandTask);
-    newTask.classList.add('task-container');
-
+    
+    actionBtnWrap.appendChild(expandTask);
     // edit button
     editBtn.classList.add('fa-solid', 'fa-pen-to-square');
     actionBtnWrap.appendChild(editBtn);
@@ -87,7 +87,11 @@ taskList.addEventListener('click', event => {
         popupContainer.style.display = 'flex';
 
         const taskTitleInput = document.createElement('input');
+        const titleLengthCount = document.createElement('p');
+        const titleWrap = document.createElement('div');
         const taskDescInput = document.createElement('textarea');
+        const descWrap = document.createElement('div');
+        const descLengthCount = document.createElement('p');
         const submitButton = document.createElement('button');
         const cancelButton = document.createElement('button')
         const oldTitle = taskContainer.querySelector('.task-title');
@@ -100,6 +104,8 @@ taskList.addEventListener('click', event => {
         taskDescInput.id = 'new-task-desc';
         taskTitleInput.placeholder = 'Enter new title';
         taskDescInput.placeholder = 'Enter new description';
+        taskTitleInput.maxLength = 50;
+        taskDescInput.maxLength = 500;
         submitButton.id = 'submit-new-info';
         submitButton.innerText = 'Submit';
         cancelButton.id = 'cancel-new-info';
@@ -107,12 +113,20 @@ taskList.addEventListener('click', event => {
         popupHeader.innerText = 'Edit Task';
         formWrap.classList.add('form-wrap');
         buttonWrap.classList.add('button-wrap');
-        popupBoard.style.height = '400px';
         popupHeader.style.marginTop = '30px';
+        titleWrap.classList.add('title-wrap');
+        descWrap.classList.add('desc-wrap');
+        titleLengthCount.classList.add('length-count');
+        descLengthCount.classList.add('length-count');
+        popupBoard.style.paddingBottom = '40px';
 
         popupBoard.appendChild(popupHeader);
-        formWrap.appendChild(taskTitleInput);
-        formWrap.appendChild(taskDescInput);
+        titleWrap.appendChild(taskTitleInput);
+        titleWrap.appendChild(titleLengthCount);
+        descWrap.appendChild(taskDescInput);
+        descWrap.appendChild(descLengthCount);
+        formWrap.appendChild(titleWrap);
+        formWrap.appendChild(descWrap);
         buttonWrap.appendChild(submitButton);
         buttonWrap.appendChild(cancelButton);
         popupBoard.appendChild(formWrap);
@@ -133,11 +147,17 @@ taskList.addEventListener('click', event => {
         submitButton.addEventListener('click', () => {
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
-
+            console.log(newTitle, newDesc);
+            
             if (newTitle !== '' || newDesc !== '') {
                 untitledTask = 0;
-                oldTitle.textContent = newTitle;
-                oldDesc.textContent = newDesc;
+
+                if (newTitle !== '')
+                    oldTitle.textContent = newTitle;
+                if (newDesc !== '')
+                    oldDesc.textContent = newDesc;
+
+                console.log(oldTitle.textContent, oldDesc.textContent);
             }
             formWrap.remove();
             buttonWrap.remove();
@@ -145,10 +165,13 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
 
         });
+        getInput();
+        getTextarea();
+        return;
     }
 
     // pin/unpin task
-    else if (clickedElement.classList.contains('fa-thumbtack') || clickedElement.classList.contains('fa-thumbtack-slash')) {
+    if (clickedElement.classList.contains('fa-thumbtack') || clickedElement.classList.contains('fa-thumbtack-slash')) {
         if (clickedElement.classList.contains('fa-thumbtack'))
             taskList.insertBefore(taskContainer, taskList.firstChild);
 
@@ -156,17 +179,36 @@ taskList.addEventListener('click', event => {
         clickedElement.classList.toggle('fa-thumbtack-slash');
 
         taskContainer.classList.toggle('pinned');
+        getInput();
+        getTextarea();
+        return;
     }
 
     // delete task
-    else if (clickedElement.classList.contains('fa-trash'))
+    if (clickedElement.classList.contains('fa-trash'))
+    {
         taskContainer.remove();
+        getInput();
+        getTextarea();
+        return;
+    }
 
-    getInput();
-    getTextarea();
+    if (clickedElement.classList.contains('fa-angle-down') || clickedElement.classList.contains('fa-angle-up'))
+    {
+        const taskDesc = taskContainer.querySelector('.task-desc');
+        taskDesc.style.display = clickedElement.classList.contains('fa-angle-down') ? 'block' : 'none';
+        
+        clickedElement.classList.toggle('fa-angle-down');
+        clickedElement.classList.toggle('fa-angle-up');
+        taskContainer.classList.toggle('expanded');
+
+        getInput();
+        getTextarea();
+        return;
+    }
 });
 function getInput() {
-    inputs.forEach(input => {
+    document.querySelectorAll('input').forEach(input => {
         const container = input.parentElement;
         const display = container.querySelector('p');
         countInputLength(input.value, display);
@@ -174,7 +216,7 @@ function getInput() {
     });
 }
 function getTextarea() {
-    textareas.forEach(textarea => {
+    document.querySelectorAll('textarea').forEach(textarea => {
         const container = textarea.parentElement;
         const display = container.querySelector('p');
 

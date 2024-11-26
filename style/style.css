@@ -57,7 +57,18 @@
 .task-container {
     display: flex;
     width: 500px;
+    height: auto;
+    overflow: hidden;
     align-items: center;
+    position: relative;
+}
+.task-desc {
+    width: 350px;
+    word-wrap: break-word;
+}
+.expanded {
+    padding: 15px 0 20px 0;
+    align-items: flex-start;
 }
 #task-list,
 #task-list-container {
@@ -102,7 +113,7 @@
     align-items: center;
     gap: 40px;
     width: 600px;
-    height: 600px;
+    height: auto;
     background-color: white;
     border-radius: 20px;
     position: fixed;
@@ -170,4 +181,29 @@ button {
 input::placeholder,
 textarea::placeholder {
     font-size: 1.2em;
+}
+i {
+    font-size: 1.3em;
+}
+.action-btn {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    gap: 5px;
+}
+.fa-circle {
+    margin: 10px;
+    margin-left: 15px;
+}
+.expanded .fa-circle {
+    margin: 0 10px 0 15px;
+}
+.title-wrap, .desc-wrap
+{
+    position: relative;
+}
+.title-wrap .length-count,
+.desc-wrap .length-count
+{
+    position: absolute;
 }
