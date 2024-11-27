@@ -118,7 +118,7 @@ taskList.addEventListener('click', event => {
         titleWrap.classList.add('title-wrap');
         descWrap.classList.add('desc-wrap');
         titleLengthCount.classList.add('length-count');
-        descLengthCount.classList.add('length-count');
+        descLengthCount.classList.add('textarea-length-count');
         popupBoard.style.paddingBottom = '40px';
 
         popupBoard.appendChild(popupHeader);
@@ -208,6 +208,17 @@ taskList.addEventListener('click', event => {
         return;
     }
 });
+
+// theme switching
+document.querySelector('.theme-switch').addEventListener('click', event => {
+    const clickedElement = event.target;
+    const body = document.body;
+
+    body.classList.toggle('dark-theme');
+    clickedElement.classList.toggle('fa-moon');
+    clickedElement.classList.toggle('fa-sun');
+});
+
 function getInput() {
     document.querySelectorAll('input').forEach(input => {
         const container = input.parentElement;

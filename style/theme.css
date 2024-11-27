@@ -1,4 +1,6 @@
-html {
+/* LIGHT THEME */
+
+.container {
     background-color: rgba(251, 251, 255, 1);
     color: rgba(13, 1, 6, 1);
 }
@@ -8,7 +10,9 @@ button {
     color: rgba(251, 251, 255, 1);
     /* box-shadow: 0 5px 10px 0 rgba(83, 98, 197, 1); */
 }
-
+input, textarea {
+    background-color: rgba(231, 231, 235, 1);
+}
 #cancel-new-info {
     background-color: transparent;
     color: rgba(53, 38, 167, 1);
@@ -18,6 +22,49 @@ button {
     background-color: rgba(230, 230, 230, 1);
     /* box-shadow: 0 5px 15px 0 rgba(200, 200, 200, 1); */
 }
+
 #popup-board {
     box-shadow: 0 15px 25px rgba(100, 100, 100, 1);
+}
+
+/* DARK THEME */
+.dark-theme .container {
+    background-color: rgba(10, 17, 40, 1);
+    color: rgba(254, 252, 251, 1);
+}
+
+.dark-theme .seperate-bar {
+    background-color: rgba(254, 252, 251, 1);
+}
+
+.dark-theme button {
+    background-color: rgba(0, 31, 84, 1);
+    color: rgba(254,252,251,1);
+}
+.dark-theme input,
+.dark-theme textarea {
+    background-color: rgba(30, 37, 60, 1);
+}
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder
+{
+    color: rgba(204, 202, 201, 1);
+}
+.dark-theme .task-container {
+    background-color: rgba(254,252,251,1);
+    color: rgba(10, 17, 40, 1);
+}
+.dark-theme .length-count,
+.dark-theme .textarea-length-count {
+    color: rgba(254, 252, 251, 1);
+}
+.dark-theme #popup-container {
+    background-color: rgba(250, 250, 250, 0.1);
+}
+.dark-theme #popup-board {
+    background-color: rgba(10, 17, 40, 1);
+    box-shadow: 0 15px 25px rgba(30, 37, 60, 1);
+}
+.dark-theme #popup-board #cancel-new-info {
+    color: rgba(254, 252, 251, 1);
 }

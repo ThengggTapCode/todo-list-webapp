@@ -16,8 +16,12 @@
     align-items: center;
     gap: 20px;
     padding: 0 100px;
+    padding-top: 20px;
 }
 
+.theme-switch {
+    font-size: 1.5em;
+}
 .header {
     display: flex;
     flex-direction: column;
@@ -192,6 +196,7 @@ textarea {
     width: 500px;
     padding: 10px;
     font-size: 1em;
+    border: none;
 }
 
 textarea {
