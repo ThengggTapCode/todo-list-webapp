@@ -17,12 +17,14 @@
     gap: 20px;
     padding: 0 100px;
 }
+
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
+
 .input-form {
     display: flex;
     flex-direction: column;
@@ -44,16 +46,19 @@
     outline: none;
     border: none;
 }
+
 .navbar {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
+
 .navbar button {
     background-color: transparent;
     border-bottom: 5px solid;
     border-radius: 0;
 }
+
 .task-container {
     display: flex;
     width: 500px;
@@ -61,14 +66,25 @@
     overflow: hidden;
     align-items: center;
     position: relative;
+    border-radius: 10px;
 }
+
+.task-title,
+.task-desc {
+    font-size: 1.2em;
+}
+
 .task-desc {
     width: 350px;
     word-wrap: break-word;
 }
+
 .expanded {
     padding: 15px 0 20px 0;
     align-items: flex-start;
+}
+.expanded .task-title {
+    margin-bottom: 10px;
 }
 #task-list,
 #task-list-container {
@@ -78,25 +94,30 @@
     align-items: center;
     gap: 20px;
 }
+
 .seperate-bar {
     width: 500px;
     height: 4px;
     background-color: black;
 }
+
 .input-form div:nth-child(1),
 .input-form div:nth-child(2) {
     position: relative;
 }
+
 .length-count {
     position: absolute;
     top: 12px;
     right: 12px;
 }
+
 .textarea-length-count {
     position: absolute;
     bottom: 12px;
     right: 12px;
 }
+
 #popup-container {
     display: flex;
     justify-content: center;
@@ -107,6 +128,7 @@
     position: fixed;
     z-index: 1;
 }
+
 #popup-board {
     display: flex;
     flex-direction: column;
@@ -118,33 +140,40 @@
     border-radius: 20px;
     position: fixed;
 }
+
 #close-popup {
     font-size: 2em;
     position: absolute;
     right: 20px;
     top: 20px;
 }
+
 #popup-board input,
 #popup-board textarea {
     width: 400px;
 }
+
 #popup-board button {
     width: fit-content;
 }
-#popup-board .form-wrap {
+
+#popup-board .input-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
 #popup-board h2 {
     font-family: 'raleway';
     font-size: 3em;
     margin-top: 100px;
 }
+
 #popup-board .button-wrap {
     display: flex;
     gap: 30px;
 }
+
 h1,
 h2 {
     font-family: 'raleway', serif;
@@ -171,6 +200,7 @@ textarea {
     min-height: 48px;
     height: 48px;
 }
+
 button {
     font-size: 1.5em;
     border: none;
@@ -178,32 +208,42 @@ button {
     font-weight: bold;
     padding: 10px 40px;
 }
+
 input::placeholder,
 textarea::placeholder {
     font-size: 1.2em;
 }
+
 i {
     font-size: 1.3em;
 }
+
 .action-btn {
     position: absolute;
     right: 15px;
     display: flex;
     gap: 5px;
 }
+
 .fa-circle {
     margin: 10px;
     margin-left: 15px;
 }
+
 .expanded .fa-circle {
     margin: 0 10px 0 15px;
 }
-.title-wrap, .desc-wrap
-{
+
+.title-wrap,
+.desc-wrap {
     position: relative;
 }
+
 .title-wrap .length-count,
-.desc-wrap .length-count
-{
+.desc-wrap .length-count {
     position: absolute;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
 }

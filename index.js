@@ -68,7 +68,8 @@ function addTask() {
 
     // add task to task list
     taskList.appendChild(newTask);
-
+    title.value = '';
+    desc.value = '';
 }
 function countInputLength(inputValue, display) {
     const count = inputValue.length;
@@ -111,7 +112,7 @@ taskList.addEventListener('click', event => {
         cancelButton.id = 'cancel-new-info';
         cancelButton.innerText = 'Cancel';
         popupHeader.innerText = 'Edit Task';
-        formWrap.classList.add('form-wrap');
+        formWrap.classList.add('input-form');
         buttonWrap.classList.add('button-wrap');
         popupHeader.style.marginTop = '30px';
         titleWrap.classList.add('title-wrap');
