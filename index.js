@@ -49,7 +49,7 @@ function addTask() {
     // expand task button
     const expandTask = document.createElement('i');
     expandTask.classList.add('fa-solid', 'fa-angle-down');
-    
+
     actionBtnWrap.appendChild(expandTask);
     // edit button
     editBtn.classList.add('fa-solid', 'fa-pen-to-square');
@@ -149,7 +149,7 @@ taskList.addEventListener('click', event => {
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
             console.log(newTitle, newDesc);
-            
+
             if (newTitle !== '' || newDesc !== '') {
                 untitledTask = 0;
 
@@ -186,19 +186,17 @@ taskList.addEventListener('click', event => {
     }
 
     // delete task
-    if (clickedElement.classList.contains('fa-trash'))
-    {
+    if (clickedElement.classList.contains('fa-trash')) {
         taskContainer.remove();
         getInput();
         getTextarea();
         return;
     }
 
-    if (clickedElement.classList.contains('fa-angle-down') || clickedElement.classList.contains('fa-angle-up'))
-    {
+    if (clickedElement.classList.contains('fa-angle-down') || clickedElement.classList.contains('fa-angle-up')) {
         const taskDesc = taskContainer.querySelector('.task-desc');
         taskDesc.style.display = clickedElement.classList.contains('fa-angle-down') ? 'block' : 'none';
-        
+
         clickedElement.classList.toggle('fa-angle-down');
         clickedElement.classList.toggle('fa-angle-up');
         taskContainer.classList.toggle('expanded');
@@ -215,8 +213,15 @@ document.querySelector('.theme-switch').addEventListener('click', event => {
     const body = document.body;
 
     body.classList.toggle('dark-theme');
-    clickedElement.classList.toggle('fa-moon');
-    clickedElement.classList.toggle('fa-sun');
+
+    if (clickedElement.classList.contains('fa-sun') || clickedElement.classList.contains('fa-moon')) {
+        clickedElement.classList.toggle('fa-sun');
+        clickedElement.classList.toggle('fa-moon');
+    } else {
+        const switchBtn = clickedElement.querySelector('i');
+        switchBtn.classList.toggle('fa-sun');
+        switchBtn.classList.toggle('fa-moon');
+    }
 });
 
 function getInput() {

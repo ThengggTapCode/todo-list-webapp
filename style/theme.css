@@ -8,7 +8,6 @@
 button {
     background-color: rgba(53, 38, 167, 1);
     color: rgba(251, 251, 255, 1);
-    /* box-shadow: 0 5px 10px 0 rgba(83, 98, 197, 1); */
 }
 input, textarea {
     background-color: rgba(231, 231, 235, 1);
@@ -20,14 +19,25 @@ input, textarea {
 
 .task-container {
     background-color: rgba(230, 230, 230, 1);
-    /* box-shadow: 0 5px 15px 0 rgba(200, 200, 200, 1); */
 }
 
 #popup-board {
     box-shadow: 0 15px 25px rgba(100, 100, 100, 1);
 }
-
-/* DARK THEME */
+.theme-switch:hover {
+    color: rgba(63, 51, 56, 1);
+    background-color: rgba(221, 221, 225, 1);
+}
+button:hover {
+    background-color: rgba(73, 58, 187, 1);
+}
+#cancel-new-info:hover {
+    color: rgba(23, 8, 137, 1);
+}
+.task-container i:hover {
+    color: rgba(63, 51, 56, 1);
+}
+            /* DARK THEME */
 .dark-theme .container {
     background-color: rgba(10, 17, 40, 1);
     color: rgba(254, 252, 251, 1);
@@ -65,6 +75,19 @@ input, textarea {
     background-color: rgba(10, 17, 40, 1);
     box-shadow: 0 15px 25px rgba(30, 37, 60, 1);
 }
-.dark-theme #popup-board #cancel-new-info {
+.dark-theme #cancel-new-info {
     color: rgba(254, 252, 251, 1);
+}
+.dark-theme .theme-switch:hover {
+    color: rgba(224, 222, 221, 1);
+    background-color: rgba(60, 67, 90, 1);
+}
+.dark-theme button:hover {
+    background-color: rgba(20, 51, 104, 1);
+}
+.dark-theme #cancel-new-info:hover {
+    color: rgba(214, 212, 211, 1);
+}
+.dark-theme .task-container i:hover {
+    color: rgba(40, 47, 70, 1);
 }

@@ -16,11 +16,20 @@
     align-items: center;
     gap: 20px;
     padding: 0 100px;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .theme-switch {
     font-size: 1.5em;
+    width: 1em;
+    height: 1em;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color, color, 200ms;
 }
 .header {
     display: flex;
@@ -55,12 +64,6 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-}
-
-.navbar button {
-    background-color: transparent;
-    border-bottom: 5px solid;
-    border-radius: 0;
 }
 
 .task-container {
@@ -212,6 +215,8 @@ button {
     border-radius: 5px;
     font-weight: bold;
     padding: 10px 40px;
+    cursor: pointer;
+    transition: background-color 200ms;
 }
 
 input::placeholder,
@@ -221,6 +226,8 @@ textarea::placeholder {
 
 i {
     font-size: 1.3em;
+    cursor: pointer;
+    transition: color 200ms;
 }
 
 .action-btn {
