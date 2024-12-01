@@ -4,6 +4,7 @@ const popupBoard = document.getElementById('popup-board');
 const inputs = document.querySelectorAll('input');
 const textareas = document.querySelectorAll('textarea');
 const closePopup = document.querySelector('.fa-xmark');
+const toastNotificationContainer = document.getElementById('toast-notification');
 
 let untitledTask = 0;
 
@@ -71,6 +72,35 @@ function addTask() {
     taskList.appendChild(newTask);
     title.value = '';
     desc.value = '';
+}
+function showToastNotification(message, icon, color)
+{
+    const toastContainer = document.createElement('div');
+    const toastMessage = document.createElement('p');
+    const closeToast = document.createElement('i');
+    const toastIcon = document.createElement('i');
+    const iconWrap = document.createElement('div');
+
+    iconWrap.classList.add('icon-wrap');
+    iconWrap.style.backgroundColor = color;
+    closeToast.classList.add('fa-solid', 'fa-xmark');
+    toastContainer.classList.add('toast-container');
+    toastMessage.innerText = message;
+    toastIcon.classList.add('fa-solid', icon);
+
+    // toastContainer.classList.toggle('active');
+    setTimeout(() => toastContainer.classList.toggle('active'), 25);
+    iconWrap.appendChild(toastIcon);
+    toastContainer.appendChild(iconWrap);
+    toastContainer.appendChild(toastMessage);
+    toastContainer.appendChild(closeToast);
+    toastNotificationContainer.appendChild(toastContainer);
+
+    getCloseToastButton();
+    setTimeout(() => {
+        toastContainer.classList.toggle('active');
+        setTimeout(() => toastContainer.remove(), 1000);
+    }, 5000);
 }
 function countInputLength(inputValue, display) {
     const count = inputValue.length;
@@ -222,6 +252,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
+            setTimeout(() => showToastNotification('Deleted task successfully!', 'fa-circle-check', 'green'), 25);
         })
         return;
     }
@@ -273,6 +304,19 @@ function getTextarea() {
         countTextareaLength(textarea.value, display);
         textarea.addEventListener('input', () => countTextareaLength(textarea.value, display));
     });
+}
+function getCloseToastButton()
+{
+    toastNotificationContainer.addEventListener('click', event => {
+        const clickedElement = event.target;
+        
+        if (clickedElement.classList.contains('fa-xmark'))
+        {
+            const toast = clickedElement.parentElement;
+            toast.classList.toggle('active');
+            setTimeout(() => toast.remove(), 1000);
+        }
+    })
 }
 getInput();
 getTextarea()

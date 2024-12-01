@@ -267,3 +267,46 @@ textarea::-webkit-scrollbar {
 .task-container i:hover {
     transform: rotate(10deg) translateY(-4px) scale(1.1);
 }
+#toast-notification {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    width: 100%;
+    height: auto;
+    gap: 20px;
+    margin-top: 20px;
+    z-index: 0;
+}
+.toast-container {
+    position: relative;
+    display: flex;
+    width: 500px;
+    height: 75px;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.3em;
+    border-radius: 10px;
+    margin-right: 20px;
+    transform: translateX(calc(100% + 500px));
+    transition: transform 500ms cubic-bezier(.74,-0.39,.39,1.33);
+}
+.active {
+    transform: translatex(0%);
+}
+.toast-container p {
+    font-weight: bold;
+}
+.toast-container .fa-xmark {
+    position: absolute;
+    right: 20px;
+}
+.icon-wrap {
+    width: 12%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px;
+}

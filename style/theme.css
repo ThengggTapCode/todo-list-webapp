@@ -38,6 +38,12 @@ button:hover {
 .task-container i:hover {
     color: rgba(63, 51, 56, 1);
 }
+.toast-container {
+    background-color: rgba(231, 231, 235, 1);
+}
+.icon-wrap {
+    color: white;
+}
             /* DARK THEME */
 .dark-theme .container {
     background-color: rgba(10, 17, 40, 1);
@@ -79,6 +85,7 @@ button:hover {
 }
 .dark-theme .cancel-button {
     color: rgba(254, 252, 251, 1);
+    background-color: transparent;
 }
 .dark-theme .theme-switch:hover {
     color: rgba(224, 222, 221, 1);
@@ -89,7 +96,11 @@ button:hover {
 }
 .dark-theme .cancel-button:hover {
     color: rgba(214, 212, 211, 1);
+    background-color: transparent;
 }
 .dark-theme .task-container i:hover {
     color: rgba(40, 47, 70, 1);
+}
+.dark-theme .toast-container {
+    background-color: rgba(50, 57, 90, 1);
 }
