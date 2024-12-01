@@ -31,6 +31,7 @@
     cursor: pointer;
     transition: background-color, color, 200ms;
 }
+
 .header {
     display: flex;
     flex-direction: column;
@@ -90,9 +91,11 @@
     padding: 15px 0 20px 0;
     align-items: flex-start;
 }
+
 .expanded .task-title {
     margin-bottom: 10px;
 }
+
 #task-list,
 #task-list-container {
     height: 100%;
@@ -227,7 +230,8 @@ textarea::placeholder {
 i {
     font-size: 1.3em;
     cursor: pointer;
-    transition: color 200ms;
+    transition-duration: 200ms;
+    transition-property: color, transform;
 }
 
 .action-btn {
@@ -258,4 +262,8 @@ i {
 
 textarea::-webkit-scrollbar {
     display: none;
+}
+
+.task-container i:hover {
+    transform: rotate(10deg) translateY(-4px) scale(1.1);
 }

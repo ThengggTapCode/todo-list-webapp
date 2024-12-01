@@ -12,7 +12,7 @@ button {
 input, textarea {
     background-color: rgba(231, 231, 235, 1);
 }
-#cancel-new-info {
+.cancel-button {
     background-color: transparent;
     color: rgba(53, 38, 167, 1);
 }
@@ -31,8 +31,9 @@ input, textarea {
 button:hover {
     background-color: rgba(73, 58, 187, 1);
 }
-#cancel-new-info:hover {
+.cancel-button:hover {
     color: rgba(23, 8, 137, 1);
+    background-color: transparent;
 }
 .task-container i:hover {
     color: rgba(63, 51, 56, 1);
@@ -48,12 +49,13 @@ button:hover {
 }
 
 .dark-theme button {
-    background-color: rgba(0, 31, 84, 1);
-    color: rgba(254,252,251,1);
+    color: rgba(0, 31, 84, 1);
+    background-color: rgba(254,252,251,1);
 }
 .dark-theme input,
 .dark-theme textarea {
     background-color: rgba(30, 37, 60, 1);
+    color: rgba(254, 252, 251, 1);
 }
 .dark-theme input::placeholder,
 .dark-theme textarea::placeholder
@@ -75,7 +77,7 @@ button:hover {
     background-color: rgba(10, 17, 40, 1);
     box-shadow: 0 15px 25px rgba(30, 37, 60, 1);
 }
-.dark-theme #cancel-new-info {
+.dark-theme .cancel-button {
     color: rgba(254, 252, 251, 1);
 }
 .dark-theme .theme-switch:hover {
@@ -83,9 +85,9 @@ button:hover {
     background-color: rgba(60, 67, 90, 1);
 }
 .dark-theme button:hover {
-    background-color: rgba(20, 51, 104, 1);
+    background-color: rgba(214, 212, 211, 1);
 }
-.dark-theme #cancel-new-info:hover {
+.dark-theme .cancel-button:hover {
     color: rgba(214, 212, 211, 1);
 }
 .dark-theme .task-container i:hover {

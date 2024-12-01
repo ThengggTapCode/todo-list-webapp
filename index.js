@@ -3,6 +3,7 @@ const popupContainer = document.getElementById('popup-container');
 const popupBoard = document.getElementById('popup-board');
 const inputs = document.querySelectorAll('input');
 const textareas = document.querySelectorAll('textarea');
+const closePopup = document.querySelector('.fa-xmark');
 
 let untitledTask = 0;
 
@@ -93,7 +94,7 @@ taskList.addEventListener('click', event => {
         const taskDescInput = document.createElement('textarea');
         const descWrap = document.createElement('div');
         const descLengthCount = document.createElement('p');
-        const submitButton = document.createElement('button');
+        const confimButton = document.createElement('button');
         const cancelButton = document.createElement('button')
         const oldTitle = taskContainer.querySelector('.task-title');
         const oldDesc = taskContainer.querySelector('.task-desc');
@@ -107,9 +108,9 @@ taskList.addEventListener('click', event => {
         taskDescInput.placeholder = 'Enter new description';
         taskTitleInput.maxLength = 50;
         taskDescInput.maxLength = 500;
-        submitButton.id = 'submit-new-info';
-        submitButton.innerText = 'Submit';
-        cancelButton.id = 'cancel-new-info';
+        confimButton.classList.add('confim-button');
+        confimButton.innerText = 'Submit';
+        cancelButton.classList.add('cancel-button');
         cancelButton.innerText = 'Cancel';
         popupHeader.innerText = 'Edit Task';
         formWrap.classList.add('input-form');
@@ -128,7 +129,7 @@ taskList.addEventListener('click', event => {
         descWrap.appendChild(descLengthCount);
         formWrap.appendChild(titleWrap);
         formWrap.appendChild(descWrap);
-        buttonWrap.appendChild(submitButton);
+        buttonWrap.appendChild(confimButton);
         buttonWrap.appendChild(cancelButton);
         popupBoard.appendChild(formWrap);
         popupBoard.appendChild(buttonWrap);
@@ -139,13 +140,13 @@ taskList.addEventListener('click', event => {
             popupHeader.remove();
             popupContainer.style.display = 'none';
         });
-        document.querySelector('.fa-xmark').addEventListener('click', () => {
+        closePopup.addEventListener('click', () => {
             formWrap.remove();
             buttonWrap.remove();
             popupHeader.remove();
             popupContainer.style.display = 'none';
-        })
-        submitButton.addEventListener('click', () => {
+        });
+        confimButton.addEventListener('click', () => {
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
             console.log(newTitle, newDesc);
@@ -187,9 +188,41 @@ taskList.addEventListener('click', event => {
 
     // delete task
     if (clickedElement.classList.contains('fa-trash')) {
-        taskContainer.remove();
-        getInput();
-        getTextarea();
+        const popupHeader = document.createElement('h2');
+        const buttonWrap = document.createElement('div');
+        const confirmBtn = document.createElement('button');
+        const cancelBtn = document.createElement('button');
+
+        popupContainer.style.display = 'flex';
+        confirmBtn.classList.add('confirm-button');
+        cancelBtn.classList.add('cancel-button');
+        confirmBtn.innerText = 'Confirm';
+        cancelBtn.innerText = 'Cancel';
+        popupHeader.innerText = 'Do you want to delete this task?';
+        popupHeader.style.fontSize = '2em';
+        popupHeader.style.marginTop = '60px';
+        popupBoard.style.paddingBottom = '40px';
+        buttonWrap.appendChild(confirmBtn);
+        buttonWrap.appendChild(cancelBtn);
+        popupBoard.appendChild(popupHeader);
+        popupBoard.append(buttonWrap);
+
+        cancelBtn.addEventListener('click', () => {
+            popupContainer.style.display = 'none';
+            buttonWrap.remove();
+            popupHeader.remove();
+        });
+        closePopup.addEventListener('click', () => {
+            popupContainer.style.display = 'none';
+            buttonWrap.remove();
+            popupHeader.remove();
+        });
+        confirmBtn.addEventListener('click', () => {
+            taskContainer.remove();
+            popupContainer.style.display = 'none';
+            buttonWrap.remove();
+            popupHeader.remove();
+        })
         return;
     }
 
