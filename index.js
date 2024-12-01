@@ -84,19 +84,20 @@ function showToastNotification(message, icon, color)
     iconWrap.classList.add('icon-wrap');
     iconWrap.style.backgroundColor = color;
     closeToast.classList.add('fa-solid', 'fa-xmark');
+    closeToast.style.padding = '0.3rem 0.5rem';
+    closeToast.style.borderRadius = '50%';
     toastContainer.classList.add('toast-container');
     toastMessage.innerText = message;
     toastIcon.classList.add('fa-solid', icon);
 
     // toastContainer.classList.toggle('active');
-    setTimeout(() => toastContainer.classList.toggle('active'), 25);
+    setTimeout(() => toastContainer.classList.toggle('active'), 1);
     iconWrap.appendChild(toastIcon);
     toastContainer.appendChild(iconWrap);
     toastContainer.appendChild(toastMessage);
     toastContainer.appendChild(closeToast);
     toastNotificationContainer.appendChild(toastContainer);
 
-    getCloseToastButton();
     setTimeout(() => {
         toastContainer.classList.toggle('active');
         setTimeout(() => toastContainer.remove(), 1000);
@@ -188,8 +189,7 @@ taskList.addEventListener('click', event => {
                     oldTitle.textContent = newTitle;
                 if (newDesc !== '')
                     oldDesc.textContent = newDesc;
-
-                console.log(oldTitle.textContent, oldDesc.textContent);
+                showToastNotification('Task edited successfully!', 'fa-pen-to-square', 'green');
             }
             formWrap.remove();
             buttonWrap.remove();
@@ -207,6 +207,10 @@ taskList.addEventListener('click', event => {
         if (clickedElement.classList.contains('fa-thumbtack'))
             taskList.insertBefore(taskContainer, taskList.firstChild);
 
+        const icon = clickedElement.classList.contains('fa-thumbtack') ? 'fa-thumbtack' : 'fa-thumbtack-slash';
+        const message = clickedElement.classList.contains('fa-thumbtack') ? 'Task pinned!' : 'Task unpinned!';   
+        showToastNotification(message, icon, 'green');
+        
         clickedElement.classList.toggle('fa-thumbtack');
         clickedElement.classList.toggle('fa-thumbtack-slash');
 
@@ -252,7 +256,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
-            setTimeout(() => showToastNotification('Deleted task successfully!', 'fa-circle-check', 'green'), 25);
+            showToastNotification('Task deleted successfully!', 'fa-trash', 'green');
         })
         return;
     }
@@ -305,18 +309,17 @@ function getTextarea() {
         textarea.addEventListener('input', () => countTextareaLength(textarea.value, display));
     });
 }
-function getCloseToastButton()
-{
-    toastNotificationContainer.addEventListener('click', event => {
-        const clickedElement = event.target;
-        
-        if (clickedElement.classList.contains('fa-xmark'))
-        {
-            const toast = clickedElement.parentElement;
-            toast.classList.toggle('active');
-            setTimeout(() => toast.remove(), 1000);
-        }
-    })
-}
+toastNotificationContainer.addEventListener('click', event => {
+    const clickedElement = event.target;
+    
+    if (clickedElement.classList.contains('fa-xmark'))
+    {
+        console.log(clickedElement)
+        const toast = clickedElement.parentElement;
+        toast.classList.toggle('active');
+        setTimeout(() => toast.remove(), 1000);
+        return;
+    }
+});
 getInput();
 getTextarea()
