@@ -8,6 +8,7 @@ const toastNotificationContainer = document.getElementById('toast-notification')
 
 let untitledTask = 0;
 
+// add task
 function addTask() {
     const title = document.getElementById('task-title-input');
     const desc = document.getElementById('task-desc-input');
@@ -73,8 +74,9 @@ function addTask() {
     title.value = '';
     desc.value = '';
 }
-function showToastNotification(message, icon, color)
-{
+
+// show toast notification
+function showToastNotification(message, icon, color) {
     const toastContainer = document.createElement('div');
     const toastMessage = document.createElement('p');
     const closeToast = document.createElement('i');
@@ -103,22 +105,31 @@ function showToastNotification(message, icon, color)
         setTimeout(() => toastContainer.remove(), 1000);
     }, 5000);
 }
+
+// count input length
 function countInputLength(inputValue, display) {
     const count = inputValue.length;
     display.innerText = `${count}/50`;
 }
+
+// count textarea length
 function countTextareaLength(textareaValue, display) {
     const count = textareaValue.length;
     display.innerText = `${count}/500`;
 }
+
+// action buttons logic
 taskList.addEventListener('click', event => {
     const clickedElement = event.target;
-    const taskContainer = clickedElement.parentElement.parentElement;
+    const taskContainer = (clickedElement.classList.contains('fa-circle') || clickedElement.classList.contains('fa-circle-check')) ?
+        clickedElement.parentElement : clickedElement.parentElement.parentElement;
 
     // edit task
     if (clickedElement.classList.contains('fa-pen-to-square')) {
+        // make popupContainer visible
         popupContainer.style.display = 'flex';
 
+        // create elements for popup
         const taskTitleInput = document.createElement('input');
         const titleLengthCount = document.createElement('p');
         const titleWrap = document.createElement('div');
@@ -133,6 +144,7 @@ taskList.addEventListener('click', event => {
         const buttonWrap = document.createElement('div')
         const popupHeader = document.createElement('h2');
 
+        // set attributes for elements
         taskTitleInput.id = 'new-task-title';
         taskDescInput.id = 'new-task-desc';
         taskTitleInput.placeholder = 'Enter new title';
@@ -153,6 +165,7 @@ taskList.addEventListener('click', event => {
         descLengthCount.classList.add('textarea-length-count');
         popupBoard.style.paddingBottom = '40px';
 
+        // appending elements
         popupBoard.appendChild(popupHeader);
         titleWrap.appendChild(taskTitleInput);
         titleWrap.appendChild(titleLengthCount);
@@ -165,22 +178,26 @@ taskList.addEventListener('click', event => {
         popupBoard.appendChild(formWrap);
         popupBoard.appendChild(buttonWrap);
 
+        // cancel button -> remove elements to close popup
         cancelButton.addEventListener('click', () => {
             formWrap.remove();
             buttonWrap.remove();
             popupHeader.remove();
             popupContainer.style.display = 'none';
         });
+
+        // close popup button -> remove elements to close popup
         closePopup.addEventListener('click', () => {
             formWrap.remove();
             buttonWrap.remove();
             popupHeader.remove();
             popupContainer.style.display = 'none';
         });
+
+        // confirm button -> submit new changes
         confimButton.addEventListener('click', () => {
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
-            console.log(newTitle, newDesc);
 
             if (newTitle !== '' || newDesc !== '') {
                 untitledTask = 0;
@@ -189,8 +206,12 @@ taskList.addEventListener('click', event => {
                     oldTitle.textContent = newTitle;
                 if (newDesc !== '')
                     oldDesc.textContent = newDesc;
+
+                // show a new toast notification after edit
                 showToastNotification('Task edited successfully!', 'fa-pen-to-square', 'green');
             }
+
+            // remove elements to close popup
             formWrap.remove();
             buttonWrap.remove();
             popupHeader.remove();
@@ -202,19 +223,38 @@ taskList.addEventListener('click', event => {
         return;
     }
 
+    // check/uncheck task
+    if (clickedElement.classList.contains('fa-circle') || clickedElement.classList.contains('fa-circle-check')) {
+        
+        // toggle 'checked' class
+        taskContainer.classList.toggle('checked');
+
+        // toggle icon
+        clickedElement.classList.toggle('fa-circle');
+        clickedElement.classList.toggle('fa-circle-check');
+
+        return;
+    }
+
     // pin/unpin task
     if (clickedElement.classList.contains('fa-thumbtack') || clickedElement.classList.contains('fa-thumbtack-slash')) {
+
+        // pining/unpining task
         if (clickedElement.classList.contains('fa-thumbtack'))
             taskList.insertBefore(taskContainer, taskList.firstChild);
 
+        // create icons for toast notification
         const icon = clickedElement.classList.contains('fa-thumbtack') ? 'fa-thumbtack' : 'fa-thumbtack-slash';
-        const message = clickedElement.classList.contains('fa-thumbtack') ? 'Task pinned!' : 'Task unpinned!';   
+        const message = clickedElement.classList.contains('fa-thumbtack') ? 'Task pinned!' : 'Task unpinned!';
         showToastNotification(message, icon, 'green');
-        
+
+        // toggle icon
         clickedElement.classList.toggle('fa-thumbtack');
         clickedElement.classList.toggle('fa-thumbtack-slash');
 
+        // toggle 'pinned' class
         taskContainer.classList.toggle('pinned');
+
         getInput();
         getTextarea();
         return;
@@ -222,12 +262,17 @@ taskList.addEventListener('click', event => {
 
     // delete task
     if (clickedElement.classList.contains('fa-trash')) {
+
+        // create elements for popup
         const popupHeader = document.createElement('h2');
         const buttonWrap = document.createElement('div');
         const confirmBtn = document.createElement('button');
         const cancelBtn = document.createElement('button');
 
+        // make popupContainer visible
         popupContainer.style.display = 'flex';
+
+        // attributes for elements
         confirmBtn.classList.add('confirm-button');
         cancelBtn.classList.add('cancel-button');
         confirmBtn.innerText = 'Confirm';
@@ -241,30 +286,45 @@ taskList.addEventListener('click', event => {
         popupBoard.appendChild(popupHeader);
         popupBoard.append(buttonWrap);
 
+        // cancel button -> remove elements to close popup
         cancelBtn.addEventListener('click', () => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
         });
+
+        // close popup button -> remove elements to close popup
         closePopup.addEventListener('click', () => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
         });
+
+        // confirm delete task
         confirmBtn.addEventListener('click', () => {
+
+            // delete task
             taskContainer.remove();
+
+            // remove elements to close popup
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
+
+            // show toast notification
             showToastNotification('Task deleted successfully!', 'fa-trash', 'green');
-        })
+        });
         return;
     }
 
+    // expand task
     if (clickedElement.classList.contains('fa-angle-down') || clickedElement.classList.contains('fa-angle-up')) {
+
         const taskDesc = taskContainer.querySelector('.task-desc');
+        // toggle taskDesc visibility
         taskDesc.style.display = clickedElement.classList.contains('fa-angle-down') ? 'block' : 'none';
 
+        // toggle icon
         clickedElement.classList.toggle('fa-angle-down');
         clickedElement.classList.toggle('fa-angle-up');
         taskContainer.classList.toggle('expanded');
@@ -280,6 +340,7 @@ document.querySelector('.theme-switch').addEventListener('click', event => {
     const clickedElement = event.target;
     const body = document.body;
 
+    // toggle 'dark-theme' class
     body.classList.toggle('dark-theme');
 
     if (clickedElement.classList.contains('fa-sun') || clickedElement.classList.contains('fa-moon')) {
@@ -311,10 +372,9 @@ function getTextarea() {
 }
 toastNotificationContainer.addEventListener('click', event => {
     const clickedElement = event.target;
-    
-    if (clickedElement.classList.contains('fa-xmark'))
-    {
-        console.log(clickedElement)
+
+    if (clickedElement.classList.contains('fa-xmark')) {
+
         const toast = clickedElement.parentElement;
         toast.classList.toggle('active');
         setTimeout(() => toast.remove(), 1000);

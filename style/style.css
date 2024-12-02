@@ -68,6 +68,7 @@
 }
 
 .task-container {
+    font-size: 1em;
     display: flex;
     width: 500px;
     height: auto;
@@ -76,7 +77,9 @@
     position: relative;
     border-radius: 10px;
 }
-
+.checked .task-info {
+    text-decoration: line-through;
+}
 .task-title,
 .task-desc {
     font-size: 1.2em;
@@ -96,8 +99,7 @@
     margin-bottom: 10px;
 }
 
-#task-list,
-#task-list-container {
+#task-list {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -241,12 +243,14 @@ i {
     gap: 5px;
 }
 
-.fa-circle {
+.fa-circle,
+.fa-circle-check {
     margin: 10px;
     margin-left: 15px;
 }
 
-.expanded .fa-circle {
+.expanded .fa-circle,
+.expanded .fa-circle-check {
     margin: 0 10px 0 15px;
 }
 
@@ -264,7 +268,7 @@ textarea::-webkit-scrollbar {
     display: none;
 }
 
-.task-container i:hover {
+.task-container i:not(.fa-circle, .fa-circle-check):hover {
     transform: rotate(10deg) translateY(-4px) scale(1.1);
 }
 #toast-notification {
@@ -277,7 +281,7 @@ textarea::-webkit-scrollbar {
     height: auto;
     gap: 20px;
     margin-top: 20px;
-    z-index: 0;
+    z-index: 1;
 }
 .toast-container {
     position: relative;
