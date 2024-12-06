@@ -68,9 +68,9 @@
 }
 
 .task-container {
-    font-size: 1em;
+    font-size: 1.3em;
     display: flex;
-    width: 500px;
+    width: 700px;
     height: auto;
     overflow: hidden;
     align-items: center;
@@ -80,13 +80,15 @@
 .checked .task-info {
     text-decoration: line-through;
 }
-.task-title,
-.task-desc {
-    font-size: 1.2em;
+.task-info {
+    width: 500px;
 }
-
+.task-title,
+p.task-desc {
+    font-size: 1.2em;
+    width: 100%;
+}
 .task-desc {
-    width: 350px;
     word-wrap: break-word;
 }
 
@@ -108,7 +110,7 @@
 }
 
 .seperate-bar {
-    width: 500px;
+    width: 700px;
     height: 4px;
     background-color: black;
 }
@@ -192,25 +194,25 @@ h2 {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 3.5em;
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 2.5em;
 }
 
 input,
 textarea {
-    width: 500px;
+    width: 600px;
     padding: 10px;
-    font-size: 1em;
+    font-size: 1.2em;
     border: none;
 }
 
 textarea {
     resize: vertical;
     max-height: 230px;
-    min-height: 48px;
+    min-height: 51px;
     height: 48px;
 }
 
@@ -286,11 +288,11 @@ textarea::-webkit-scrollbar {
 .toast-container {
     position: relative;
     display: flex;
-    width: 500px;
-    height: 75px;
+    width: 600px;
+    height: 80px;
     align-items: center;
     gap: 20px;
-    font-size: 1.3em;
+    font-size: 1.5em;
     border-radius: 10px;
     margin-right: 20px;
     transform: translateX(calc(100% + 500px));
@@ -313,4 +315,9 @@ textarea::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     border-radius: 10px 0 0 10px;
+}
+#table-header {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
 }
