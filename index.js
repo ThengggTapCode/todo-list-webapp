@@ -10,8 +10,12 @@ let untitledTask = 0;
 
 // add task
 function addTask() {
-    const title = document.getElementById('task-title-input');
-    const desc = document.getElementById('task-desc-input');
+    const title = document.createElement('input');
+    const desc = document.createElement('textarea');
+    const titleWrap = document.createElement('div');
+    const descWrap = document.createElement('div');
+    const titleLengthCount = document.createElement('p');
+    const descLengthCount = document.createElement('p');
     const newTask = document.createElement('div');
     const taskTitle = document.createElement('p');
     const taskDesc = document.createElement('p');
@@ -20,59 +24,129 @@ function addTask() {
     const pinBtn = document.createElement('i');
     const deleteBtn = document.createElement('i');
     const actionBtnWrap = document.createElement('div');
+    const popupHeader = document.createElement('h2');
+    const addBtn = document.createElement('button');
+    const cancelBtn = document.createElement('button');
+    const buttonWrap = document.createElement('div');
 
+    // show popup
+    popupContainer.style.display = 'flex';
+
+    // styling & attributes
+    title.maxLength = '50';
+    desc.maxLength = '500';
+    title.placeholder = 'Enter task title';
+    desc.placeholder = 'Enter task description';
+    title.autocomplete = 'off';
+    titleLengthCount.classList.add('length-count');
+    descLengthCount.classList.add('textarea-length-count');
+    addBtn.id = 'add-task';
+    cancelBtn.classList.add('cancel-button');
+    addBtn.innerText = 'Add';
+    cancelBtn.innerText = 'Cancel';
+    popupHeader.innerText = 'Create a new task';
+    popupHeader.style.textAlign = 'center';
+    titleWrap.style.position = 'relative';
+    descWrap.style.position = 'relative';
     newTask.classList.add('task-container');
 
-    if (title.value === '') {
-        untitledTask++;
-        taskTitle.innerText = `Untitled task #${untitledTask}`
-    } else {
-        untitledTask = 0;
-        taskTitle.innerText = title.value.trim();
-    }
+    // add input, textarea, buttons to wrap div
+    titleWrap.appendChild(title);
+    titleWrap.appendChild(titleLengthCount);
+    descWrap.appendChild(desc);
+    descWrap.appendChild(descLengthCount);
+    buttonWrap.appendChild(addBtn);
+    buttonWrap.appendChild(cancelBtn);
 
-    taskDesc.innerText = desc.value === '' ? 'No description' : desc.value.trim();
+    // add wrap div to popup
+    popupBoard.appendChild(popupHeader);
+    popupBoard.appendChild(titleWrap);
+    popupBoard.appendChild(descWrap);
+    popupBoard.appendChild(buttonWrap);
 
-    // check task button
-    const checkTask = document.createElement('i');
-    checkTask.classList.add('fa-regular', 'fa-circle');
-    newTask.appendChild(checkTask);
+    getInput();
+    getTextarea();
 
-    // add info to taskInfo
-    taskTitle.classList.add('task-title');
-    taskDesc.classList.add('task-desc');
-    taskInfoWrap.appendChild(taskTitle);
-    taskInfoWrap.appendChild(taskDesc);
-    taskDesc.style.display = 'none';
+    // close popup on cancel button click
+    cancelBtn.addEventListener('click', () => {
+        popupHeader.remove();
+        titleWrap.remove();
+        descWrap.remove();
+        buttonWrap.remove();
+        popupContainer.style.display = 'none';
+    });
 
-    // add task info
-    taskInfoWrap.classList.add('task-info');
-    newTask.appendChild(taskInfoWrap);
+    // close popup on close popup button click
+    closePopup.addEventListener('click', () => {
+        popupHeader.remove();
+        titleWrap.remove();
+        descWrap.remove();
+        buttonWrap.remove();
+        popupContainer.style.display = 'none';
+    })
 
-    // expand task button
-    const expandTask = document.createElement('i');
-    expandTask.classList.add('fa-solid', 'fa-angle-down');
+    // add task
+    addBtn.addEventListener('click', () => {
+        // check input vale
+        if (title.value === '') {
+            untitledTask++;
+            taskTitle.innerText = `Untitled task #${untitledTask}` // default if input is empty
+        } else {
+            untitledTask = 0;
+            taskTitle.innerText = title.value.trim(); // set title
+        }
 
-    actionBtnWrap.appendChild(expandTask);
-    // edit button
-    editBtn.classList.add('fa-solid', 'fa-pen-to-square');
-    actionBtnWrap.appendChild(editBtn);
+        taskDesc.innerText = desc.value === '' ? 'No description' : desc.value.trim(); // set desc, default if textarea is empty
 
-    // pin button
-    pinBtn.classList.add('fa-solid', 'fa-thumbtack');
-    actionBtnWrap.appendChild(pinBtn);
+        // check task button
+        const checkTask = document.createElement('i');
+        checkTask.classList.add('fa-regular', 'fa-circle');
+        newTask.appendChild(checkTask);
 
-    // delete button
-    deleteBtn.classList.add('fa-solid', 'fa-trash');
-    actionBtnWrap.appendChild(deleteBtn);
+        // add info to taskInfo
+        taskTitle.classList.add('task-title');
+        taskDesc.classList.add('task-desc');
+        taskInfoWrap.appendChild(taskTitle);
+        taskInfoWrap.appendChild(taskDesc);
 
-    actionBtnWrap.classList.add('action-btn');
-    newTask.appendChild(actionBtnWrap);
+        taskDesc.style.display = 'none';
 
-    // add task to task list
-    taskList.appendChild(newTask);
-    title.value = '';
-    desc.value = '';
+        // add task info
+        taskInfoWrap.classList.add('task-info');
+        newTask.appendChild(taskInfoWrap);
+
+        // expand task button
+        const expandTask = document.createElement('i');
+        expandTask.classList.add('fa-solid', 'fa-angle-down');
+
+        actionBtnWrap.appendChild(expandTask);
+        // edit button
+        editBtn.classList.add('fa-solid', 'fa-pen-to-square');
+        actionBtnWrap.appendChild(editBtn);
+
+        // pin button
+        pinBtn.classList.add('fa-solid', 'fa-thumbtack');
+        actionBtnWrap.appendChild(pinBtn);
+
+        // delete button
+        deleteBtn.classList.add('fa-solid', 'fa-trash');
+        actionBtnWrap.appendChild(deleteBtn);
+
+        actionBtnWrap.classList.add('action-btn');
+        newTask.appendChild(actionBtnWrap);
+
+        // add task to task list
+        taskList.appendChild(newTask);
+
+        // close popup
+        popupHeader.remove();
+        titleWrap.remove();
+        descWrap.remove();
+        buttonWrap.remove();
+        popupContainer.style.display = 'none';
+
+        showToastNotification(`Added "${taskTitle.innerText}"!`, 'fa-note-sticky', 'green');
+    });
 }
 
 // show toast notification
@@ -123,6 +197,7 @@ taskList.addEventListener('click', event => {
     const clickedElement = event.target;
     const taskContainer = (clickedElement.classList.contains('fa-circle') || clickedElement.classList.contains('fa-circle-check')) ?
         clickedElement.parentElement : clickedElement.parentElement.parentElement;
+    const taskTitle = taskContainer.querySelector('.task-title');
 
     // edit task
     if (clickedElement.classList.contains('fa-pen-to-square')) {
@@ -152,18 +227,17 @@ taskList.addEventListener('click', event => {
         taskTitleInput.maxLength = 50;
         taskDescInput.maxLength = 500;
         confimButton.classList.add('confim-button');
-        confimButton.innerText = 'Submit';
+        confimButton.innerText = 'Edit';
         cancelButton.classList.add('cancel-button');
         cancelButton.innerText = 'Cancel';
-        popupHeader.innerText = 'Edit Task';
+        popupHeader.innerText = `Edit "${taskTitle.innerText}"`;
+        popupHeader.style.textAlign = 'center';
         formWrap.classList.add('input-form');
         buttonWrap.classList.add('button-wrap');
-        popupHeader.style.marginTop = '30px';
         titleWrap.classList.add('title-wrap');
         descWrap.classList.add('desc-wrap');
         titleLengthCount.classList.add('length-count');
         descLengthCount.classList.add('textarea-length-count');
-        popupBoard.style.paddingBottom = '40px';
 
         // appending elements
         popupBoard.appendChild(popupHeader);
@@ -203,12 +277,12 @@ taskList.addEventListener('click', event => {
                 untitledTask = 0;
 
                 if (newTitle !== '')
-                    oldTitle.textContent = newTitle;
+                    oldTitle.innerText = newTitle;
                 if (newDesc !== '')
-                    oldDesc.textContent = newDesc;
+                    oldDesc.innerText = newDesc;
 
                 // show a new toast notification after edit
-                showToastNotification('Task edited successfully!', 'fa-pen-to-square', 'green');
+                showToastNotification(`Edited "${oldTitle.innerText}"!`, 'fa-pen-to-square', 'green');
             }
 
             // remove elements to close popup
@@ -225,7 +299,7 @@ taskList.addEventListener('click', event => {
 
     // check/uncheck task
     if (clickedElement.classList.contains('fa-circle') || clickedElement.classList.contains('fa-circle-check')) {
-        
+
         // toggle 'checked' class
         taskContainer.classList.toggle('checked');
 
@@ -244,8 +318,11 @@ taskList.addEventListener('click', event => {
             taskList.insertBefore(taskContainer, taskList.firstChild);
 
         // create icons for toast notification
+
         const icon = clickedElement.classList.contains('fa-thumbtack') ? 'fa-thumbtack' : 'fa-thumbtack-slash';
-        const message = clickedElement.classList.contains('fa-thumbtack') ? 'Task pinned!' : 'Task unpinned!';
+        const message = clickedElement.classList.contains('fa-thumbtack') ?
+                        `Pinned "${taskTitle.innerText}"!` : `Unpinned "${taskTitle.innerText}"!`;
+
         showToastNotification(message, icon, 'green');
 
         // toggle icon
@@ -275,12 +352,14 @@ taskList.addEventListener('click', event => {
         // attributes for elements
         confirmBtn.classList.add('confirm-button');
         cancelBtn.classList.add('cancel-button');
-        confirmBtn.innerText = 'Confirm';
-        cancelBtn.innerText = 'Cancel';
-        popupHeader.innerText = 'Do you want to delete this task?';
+        confirmBtn.innerText = 'Yes';
+        cancelBtn.innerText = 'No';
+        popupHeader.innerText = `Do you want to delete "${taskTitle.innerText}"?`;
         popupHeader.style.fontSize = '2em';
-        popupHeader.style.marginTop = '60px';
-        popupBoard.style.paddingBottom = '40px';
+        popupHeader.style.margin = '0 20px';
+        popupHeader.style.textAlign = 'center';
+        popupBoard.style.width = '600px';
+
         buttonWrap.appendChild(confirmBtn);
         buttonWrap.appendChild(cancelBtn);
         popupBoard.appendChild(popupHeader);
@@ -291,6 +370,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
+            popupBoard.style.width = '700px';
         });
 
         // close popup button -> remove elements to close popup
@@ -298,6 +378,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
+            popupBoard.style.width = '700px';
         });
 
         // confirm delete task
@@ -312,7 +393,8 @@ taskList.addEventListener('click', event => {
             popupHeader.remove();
 
             // show toast notification
-            showToastNotification('Task deleted successfully!', 'fa-trash', 'green');
+            showToastNotification(`Deleted "${taskTitle.innerText}"!`, 'fa-trash', 'green');
+            popupBoard.style.width = '700px';
         });
         return;
     }
@@ -376,8 +458,11 @@ toastNotificationContainer.addEventListener('click', event => {
     if (clickedElement.classList.contains('fa-xmark')) {
 
         const toast = clickedElement.parentElement;
-        toast.classList.toggle('active');
-        setTimeout(() => toast.remove(), 1000);
+        if (toast.classList.contains('active')) {
+            toast.classList.remove('active');
+            setTimeout(() => toast.remove(), 1000);
+            return;
+        }
         return;
     }
 });
