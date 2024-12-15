@@ -46,7 +46,7 @@
     gap: 20px;
 }
 
-#submit-task {
+.submit-task {
     padding: 15px 40px;
     outline: none;
     border: none;
@@ -311,4 +311,14 @@ textarea::-webkit-scrollbar {
     width: 700px;
     display: flex;
     justify-content: space-between;
+}
+.notaskfound-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.notaskfound-wrap p {
+    font-size: 2em;
 }

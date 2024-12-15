@@ -8,6 +8,28 @@ const toastNotificationContainer = document.getElementById('toast-notification')
 
 let untitledTask = 0;
 
+function checkTaskCount() {
+    if (taskList.childElementCount === 0) {
+        // create 'no task found' board
+        const title = document.createElement('p');
+        const addBtn = document.createElement('button');
+        const wrap = document.createElement('div');
+
+        addBtn.classList.add('submit-task');
+        addBtn.setAttribute('onclick', 'addTask()');
+        addBtn.innerText = 'Add';
+        title.innerText = 'No task found, add a new one';
+        title.classList.add('notaskfound-title');
+        wrap.classList.add('notaskfound-wrap');
+
+        wrap.appendChild(title);
+        wrap.appendChild(addBtn);
+        taskList.appendChild(wrap);
+    } else if (taskList.contains(
+        document.querySelector('.notaskfound-wrap')
+    ))
+        document.querySelector('.notaskfound-wrap').remove();
+}
 // add task
 function addTask() {
     const title = document.createElement('input');
@@ -145,6 +167,7 @@ function addTask() {
         buttonWrap.remove();
         popupContainer.style.display = 'none';
 
+        checkTaskCount();
         showToastNotification(`Added "${taskTitle.innerText}"!`, 'fa-note-sticky', 'green');
     });
 }
@@ -321,7 +344,7 @@ taskList.addEventListener('click', event => {
 
         const icon = clickedElement.classList.contains('fa-thumbtack') ? 'fa-thumbtack' : 'fa-thumbtack-slash';
         const message = clickedElement.classList.contains('fa-thumbtack') ?
-                        `Pinned "${taskTitle.innerText}"!` : `Unpinned "${taskTitle.innerText}"!`;
+            `Pinned "${taskTitle.innerText}"!` : `Unpinned "${taskTitle.innerText}"!`;
 
         showToastNotification(message, icon, 'green');
 
@@ -393,6 +416,7 @@ taskList.addEventListener('click', event => {
             popupHeader.remove();
 
             // show toast notification
+            checkTaskCount();
             showToastNotification(`Deleted "${taskTitle.innerText}"!`, 'fa-trash', 'green');
             popupBoard.style.width = '700px';
         });
@@ -468,3 +492,4 @@ toastNotificationContainer.addEventListener('click', event => {
 });
 getInput();
 getTextarea()
+checkTaskCount()
