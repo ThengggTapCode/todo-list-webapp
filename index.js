@@ -445,7 +445,7 @@ taskList.addEventListener('click', event => {
 });
 
 // theme switching
-document.querySelector('.theme-switch').addEventListener('click', event => {
+document.querySelector('#theme-switch').addEventListener('click', event => {
     const clickedElement = event.target;
     const body = document.body;
 

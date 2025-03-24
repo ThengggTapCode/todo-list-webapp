@@ -26,7 +26,7 @@ input, textarea {
 #popup-board {
     box-shadow: 0 15px 25px rgba(100, 100, 100, 1);
 }
-.theme-switch:hover {
+#theme-switch:hover {
     color: rgba(63, 51, 56, 1);
     background-color: rgba(221, 221, 225, 1);
 }
@@ -96,7 +96,7 @@ button:hover {
     color: rgba(254, 252, 251, 1);
     background-color: transparent;
 }
-.dark-theme .theme-switch:hover {
+.dark-theme #theme-switch:hover {
     color: rgba(224, 222, 221, 1);
     background-color: rgba(60, 67, 90, 1);
 }

@@ -19,7 +19,7 @@
     padding-top: 10px;
 }
 
-.theme-switch {
+#theme-switch {
     font-size: 1.5em;
     width: 1em;
     height: 1em;
@@ -30,6 +30,8 @@
     border-radius: 50%;
     cursor: pointer;
     transition: background-color, color, 200ms;
+    position: absolute;
+    left: 10px;
 }
 
 .header {
@@ -37,6 +39,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    margin-top: 80px;
 }
 
 #input-form {
