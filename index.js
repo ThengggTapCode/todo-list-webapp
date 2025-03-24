@@ -9,12 +9,13 @@ const toastNotificationContainer = document.getElementById('toast-notification')
 let untitledTask = 0;
 
 function checkTaskCount() {
+    const inputForm = document.getElementById('input-form');
+
     if (taskList.childElementCount === 0) {
         // create 'no task found' board
         const title = document.createElement('p');
         const addBtn = document.createElement('button');
         const wrap = document.createElement('div');
-
         addBtn.classList.add('submit-task');
         addBtn.setAttribute('onclick', 'addTask()');
         addBtn.innerText = 'Add';
@@ -25,10 +26,12 @@ function checkTaskCount() {
         wrap.appendChild(title);
         wrap.appendChild(addBtn);
         taskList.appendChild(wrap);
-    } else if (taskList.contains(
-        document.querySelector('.notaskfound-wrap')
-    ))
+        inputForm.style.display = 'none';
+
+    } else if (taskList.contains(document.querySelector('.notaskfound-wrap'))) {
         document.querySelector('.notaskfound-wrap').remove();
+        inputForm.style.display = 'flex';
+    }
 }
 // add task
 function addTask() {
