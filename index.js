@@ -9,6 +9,9 @@ const toastNotificationContainer = document.getElementById('toast-notification')
 let untitledTask = 0;
 
 function checkTaskCount() {
+    getPreferredTheme();
+    getData();
+    getUntitledCount();
     const inputForm = document.getElementById('input-form');
 
     if (taskList.childElementCount === 0) {
@@ -115,9 +118,11 @@ function addTask() {
         // check input vale
         if (title.value === '') {
             untitledTask++;
+            saveUntitledCount();
             taskTitle.innerText = `Untitled task #${untitledTask}` // default if input is empty
         } else {
             untitledTask = 0;
+            saveUntitledCount();
             taskTitle.innerText = title.value.trim(); // set title
         }
 
@@ -162,6 +167,7 @@ function addTask() {
 
         // add task to task list
         taskList.appendChild(newTask);
+        saveData();
 
         // close popup
         popupHeader.remove();
@@ -320,6 +326,7 @@ taskList.addEventListener('click', event => {
         });
         getInput();
         getTextarea();
+        saveData();
         return;
     }
 
@@ -333,6 +340,7 @@ taskList.addEventListener('click', event => {
         clickedElement.classList.toggle('fa-circle');
         clickedElement.classList.toggle('fa-circle-check');
 
+        saveData();
         return;
     }
 
@@ -360,6 +368,7 @@ taskList.addEventListener('click', event => {
 
         getInput();
         getTextarea();
+        saveData();
         return;
     }
 
@@ -412,6 +421,9 @@ taskList.addEventListener('click', event => {
 
             // delete task
             taskContainer.remove();
+            untitledTask--;
+            saveUntitledCount();
+            saveData();
 
             // remove elements to close popup
             popupContainer.style.display = 'none';
@@ -451,6 +463,7 @@ document.querySelector('#theme-switch').addEventListener('click', event => {
 
     // toggle 'dark-theme' class
     body.classList.toggle('dark-theme');
+    setPreferredTheme();
 
     if (clickedElement.classList.contains('fa-sun') || clickedElement.classList.contains('fa-moon')) {
         clickedElement.classList.toggle('fa-sun');
@@ -493,6 +506,39 @@ toastNotificationContainer.addEventListener('click', event => {
         return;
     }
 });
+function saveData() {
+    localStorage.setItem('data', taskList.innerHTML);
+}
+function getData() {
+    const data = localStorage.getItem('data');
+    if (data)
+        taskList.innerHTML = data;
+}
+function saveUntitledCount() {
+    localStorage.setItem('untitled-count', untitledTask);
+}
+function getUntitledCount() {
+    const count = parseInt(localStorage.getItem('untitled-count'));
+    untitledTask = count ? count : 0;
+}
+function setPreferredTheme() {
+    const theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+}
+function getPreferredTheme() {
+    const theme = localStorage.getItem('theme');
+    const switcher = document.querySelector('#theme-switch i');
+
+    if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+        switcher.classList.add('fa-sun');
+        switcher.classList.remove('fa-moon');
+    } else if (theme === 'light') {
+        switcher.classList.add('fa-moon');
+        switcher.classList.remove('fa-sun');
+    }
+
+}
 getInput();
 getTextarea()
 checkTaskCount()
