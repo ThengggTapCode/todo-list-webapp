@@ -22,7 +22,7 @@ function checkTaskCount() {
         addBtn.classList.add('submit-task');
         addBtn.setAttribute('onclick', 'addTask()');
         addBtn.innerText = 'Add';
-        title.innerText = 'No task found, add a new one';
+        title.innerText = 'Hiện không có nhiệm vụ cần làm!';
         title.classList.add('notaskfound-title');
         wrap.classList.add('notaskfound-wrap');
 
@@ -63,16 +63,16 @@ function addTask() {
     // styling & attributes
     title.maxLength = '50';
     desc.maxLength = '500';
-    title.placeholder = 'Enter task title';
-    desc.placeholder = 'Enter task description';
+    title.placeholder = 'Nhập tiêu đề';
+    desc.placeholder = 'Nhập mô tả';
     title.autocomplete = 'off';
     titleLengthCount.classList.add('length-count');
     descLengthCount.classList.add('textarea-length-count');
     addBtn.id = 'add-task';
     cancelBtn.classList.add('cancel-button');
-    addBtn.innerText = 'Add';
-    cancelBtn.innerText = 'Cancel';
-    popupHeader.innerText = 'Create a new task';
+    addBtn.innerText = 'Thêm';
+    cancelBtn.innerText = 'Hủy';
+    popupHeader.innerText = 'Thêm nhiệm vụ mới';
     popupHeader.style.textAlign = 'center';
     titleWrap.style.position = 'relative';
     descWrap.style.position = 'relative';
@@ -119,14 +119,14 @@ function addTask() {
         if (title.value === '') {
             untitledTask++;
             saveUntitledCount();
-            taskTitle.innerText = `Untitled task #${untitledTask}` // default if input is empty
+            taskTitle.innerText = `Không có tiêu đề ${untitledTask}` // default if input is empty
         } else {
             untitledTask = 0;
             saveUntitledCount();
             taskTitle.innerText = title.value.trim(); // set title
         }
 
-        taskDesc.innerText = desc.value === '' ? 'No description' : desc.value.trim(); // set desc, default if textarea is empty
+        taskDesc.innerText = desc.value === '' ? 'Không có mô tả' : desc.value.trim(); // set desc, default if textarea is empty
 
         // check task button
         const checkTask = document.createElement('i');
@@ -215,7 +215,7 @@ function showToastNotification(message, icon, color) {
 // count input length
 function countInputLength(inputValue, display) {
     const count = inputValue.length;
-    display.innerText = `${count}/50`;
+    display.innerText = `${count}/30`;
 }
 
 // count textarea length
@@ -254,14 +254,14 @@ taskList.addEventListener('click', event => {
         // set attributes for elements
         taskTitleInput.id = 'new-task-title';
         taskDescInput.id = 'new-task-desc';
-        taskTitleInput.placeholder = 'Enter new title';
-        taskDescInput.placeholder = 'Enter new description';
-        taskTitleInput.maxLength = 50;
+        taskTitleInput.placeholder = 'Nhập tiêu đề mới';
+        taskDescInput.placeholder = 'Nhập mô tả mới';
+        taskTitleInput.maxLength = 30;
         taskDescInput.maxLength = 500;
         confimButton.classList.add('confim-button');
-        confimButton.innerText = 'Edit';
+        confimButton.innerText = 'Chỉnh sửa';
         cancelButton.classList.add('cancel-button');
-        cancelButton.innerText = 'Cancel';
+        cancelButton.innerText = 'Hủy';
         popupHeader.innerText = `Edit "${taskTitle.innerText}"`;
         popupHeader.style.textAlign = 'center';
         formWrap.classList.add('input-form');
@@ -314,7 +314,7 @@ taskList.addEventListener('click', event => {
                     oldDesc.innerText = newDesc;
 
                 // show a new toast notification after edit
-                showToastNotification(`Edited "${oldTitle.innerText}"!`, 'fa-pen-to-square', 'green');
+                showToastNotification(`Đã chỉnh sửa "${oldTitle.innerText}"!`, 'fa-pen-to-square', 'green');
             }
 
             // remove elements to close popup
@@ -355,7 +355,7 @@ taskList.addEventListener('click', event => {
 
         const icon = clickedElement.classList.contains('fa-thumbtack') ? 'fa-thumbtack' : 'fa-thumbtack-slash';
         const message = clickedElement.classList.contains('fa-thumbtack') ?
-            `Pinned "${taskTitle.innerText}"!` : `Unpinned "${taskTitle.innerText}"!`;
+            `Đã ghim "${taskTitle.innerText}"!` : `Đã bỏ ghim "${taskTitle.innerText}"!`;
 
         showToastNotification(message, icon, 'green');
 
@@ -387,9 +387,9 @@ taskList.addEventListener('click', event => {
         // attributes for elements
         confirmBtn.classList.add('confirm-button');
         cancelBtn.classList.add('cancel-button');
-        confirmBtn.innerText = 'Yes';
-        cancelBtn.innerText = 'No';
-        popupHeader.innerText = `Do you want to delete "${taskTitle.innerText}"?`;
+        confirmBtn.innerText = 'Xóa';
+        cancelBtn.innerText = 'Hủy';
+        popupHeader.innerText = `Xóa "${taskTitle.innerText}"?`;
         popupHeader.style.fontSize = '2em';
         popupHeader.style.margin = '0 20px';
         popupHeader.style.textAlign = 'center';
@@ -432,7 +432,7 @@ taskList.addEventListener('click', event => {
 
             // show toast notification
             checkTaskCount();
-            showToastNotification(`Deleted "${taskTitle.innerText}"!`, 'fa-trash', 'green');
+            showToastNotification(`Đã xóa "${taskTitle.innerText}"!`, 'fa-trash', 'green');
             popupBoard.style.width = '700px';
         });
         return;
