@@ -174,7 +174,7 @@ p.task-desc {
 
 #popup-board h2 {
     font-family: 'raleway';
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 #popup-board .button-wrap {
@@ -207,7 +207,7 @@ textarea {
     resize: vertical;
     max-height: 230px;
     min-height: 51px;
-    height: 48px;
+    height: 115px;
 }
 
 button {
@@ -324,4 +324,10 @@ textarea::-webkit-scrollbar {
 }
 .notaskfound-wrap p {
     font-size: 2em;
+}
+.popup-header {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

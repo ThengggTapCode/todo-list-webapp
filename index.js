@@ -61,8 +61,8 @@ function addTask() {
     popupContainer.style.display = 'flex';
 
     // styling & attributes
-    title.maxLength = '50';
-    desc.maxLength = '500';
+    title.maxLength = 30;
+    desc.maxLength = 400;
     title.placeholder = 'Nhập tiêu đề';
     desc.placeholder = 'Nhập mô tả';
     title.autocomplete = 'off';
@@ -221,7 +221,7 @@ function countInputLength(inputValue, display) {
 // count textarea length
 function countTextareaLength(textareaValue, display) {
     const count = textareaValue.length;
-    display.innerText = `${count}/500`;
+    display.innerText = `${count}/400`;
 }
 
 // action buttons logic
@@ -257,12 +257,13 @@ taskList.addEventListener('click', event => {
         taskTitleInput.placeholder = 'Nhập tiêu đề mới';
         taskDescInput.placeholder = 'Nhập mô tả mới';
         taskTitleInput.maxLength = 30;
-        taskDescInput.maxLength = 500;
+        taskDescInput.maxLength = 400;
         confimButton.classList.add('confim-button');
         confimButton.innerText = 'Chỉnh sửa';
         cancelButton.classList.add('cancel-button');
         cancelButton.innerText = 'Hủy';
-        popupHeader.innerText = `Edit "${taskTitle.innerText}"`;
+        popupHeader.innerText = `Chỉnh sửa "${taskTitle.innerText}"`;
+        popupHeader.classList.add('popup-header');
         popupHeader.style.textAlign = 'center';
         formWrap.classList.add('input-form');
         buttonWrap.classList.add('button-wrap');
