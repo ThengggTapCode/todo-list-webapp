@@ -5,17 +5,21 @@
     font-family: 'nunito sans', sans-serif;
 }
 
-.container {
+html, body, .container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    margin: 0;
 }
-
+html, body {
+    display: flex;
+    flex-direction: column;
+}
 .app {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 0 100px;
+    padding: 0 100px 108px 100px;
     padding-top: 10px;
 }
 
@@ -330,4 +334,39 @@ textarea::-webkit-scrollbar {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.footer {
+    display: flex;
+    padding: 32px;
+    flex-direction: column;
+    align-items: center;
+}
+.footer h3 {
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+    width: 500px;
+}
+.footer p {
+    font-size: 1.2em;
+}
+.footer .seperate-bar {
+    width: 90%;
+}
+.footer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 32px;
+}
+.footer-credit {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    width: 90%;
+    justify-content: space-around;
+}
+
+.logo-doan-tinhoctre {
+    height: 80px;
 }
