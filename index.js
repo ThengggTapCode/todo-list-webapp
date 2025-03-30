@@ -422,7 +422,7 @@ taskList.addEventListener('click', event => {
 
             // delete task
             taskContainer.remove();
-            untitledTask = (untitledTask > 0) ? untitledTask-- : 0;
+            untitledTask = (untitledTask > 0) ? untitledTask -= 1 : 0;
             saveUntitledCount();
             saveData();
 
