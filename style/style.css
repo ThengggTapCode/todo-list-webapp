@@ -19,7 +19,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 0 100px 108px 100px;
+    padding: 0 100px 170px 100px;
     padding-top: 10px;
 }
 
@@ -41,9 +41,11 @@ html, body {
 .header {
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     gap: 20px;
     margin-top: 80px;
+    width: 100%;
 }
 
 #input-form {
@@ -68,7 +70,7 @@ html, body {
 .task-container {
     font-size: 1.3em;
     display: flex;
-    width: 700px;
+    width: 750px;
     height: auto;
     overflow: hidden;
     align-items: center;
@@ -108,7 +110,7 @@ p.task-desc {
 }
 
 .seperate-bar {
-    width: 700px;
+    width: 90%;
     height: 4px;
     background-color: black;
 }
@@ -192,11 +194,11 @@ h2 {
 }
 
 h1 {
-    font-size: 3.5em;
+    font-size: 4em;
 }
 
 h2 {
-    font-size: 2.5em;
+    font-size: 3em;
 }
 
 input,
@@ -286,7 +288,7 @@ textarea::-webkit-scrollbar {
 .toast-container {
     position: relative;
     display: flex;
-    width: 600px;
+    width: 680px;
     height: 80px;
     align-items: center;
     gap: 20px;
@@ -342,9 +344,9 @@ textarea::-webkit-scrollbar {
     align-items: center;
 }
 .footer h3 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-family: 'Raleway', sans-serif;
-    width: 500px;
+    /* width: 500px; */
 }
 .footer p {
     font-size: 1.2em;

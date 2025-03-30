@@ -177,7 +177,7 @@ function addTask() {
         popupContainer.style.display = 'none';
 
         checkTaskCount();
-        showToastNotification(`Added "${taskTitle.innerText}"!`, 'fa-note-sticky', 'green');
+        showToastNotification(`Đã thêm "${taskTitle.innerText}"!`, 'fa-note-sticky', 'green');
     });
 }
 
@@ -395,6 +395,7 @@ taskList.addEventListener('click', event => {
         popupHeader.style.margin = '0 20px';
         popupHeader.style.textAlign = 'center';
         popupBoard.style.width = '600px';
+        popupHeader.classList.add('popup-header');
 
         buttonWrap.appendChild(confirmBtn);
         buttonWrap.appendChild(cancelBtn);

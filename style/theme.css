@@ -56,9 +56,10 @@ button:hover {
 }
 /*          DARK THEME          */
 
-
-.dark-theme .container {
+.dark-theme .app {
     background-color: rgba(10, 17, 40, 1);
+}
+.dark-theme .container {
     color: rgba(254, 252, 251, 1);
 }
 
