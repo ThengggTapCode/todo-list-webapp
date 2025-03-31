@@ -54,6 +54,10 @@ button:hover {
 .footer .seperate-bar {
     background-color: rgba(251, 251, 255, 1);
 }
+.member {
+    background-color: rgba(23, 8, 137, 1);
+}
+
 /*          DARK THEME          */
 
 .dark-theme .app {
