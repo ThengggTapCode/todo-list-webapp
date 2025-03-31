@@ -374,11 +374,14 @@ textarea::-webkit-scrollbar {
     display: flex;
     align-items: center;
     border-radius: 16px;
+    position: relative;
 }
 .social-media {
     width: 64px;
     height: 64px;
     margin-top: 16px;
+    position: absolute;
+    right: 32px;
 }
 .social-media img {
     width: 64px;
