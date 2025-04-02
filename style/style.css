@@ -341,7 +341,8 @@ textarea::-webkit-scrollbar {
 .footer h3 {
     font-size: 2.2rem;
     font-family: 'Raleway', sans-serif;
-    /* width: 500px; */
+    width: 50%;
+    text-align: center;
 }
 .footer p {
     font-size: 1.4em;
@@ -369,12 +370,16 @@ textarea::-webkit-scrollbar {
     height: 80px;
 }
 .member {
-    width: 35%;
+    width: 40%;
     padding: 32px;
     display: flex;
     align-items: center;
     border-radius: 16px;
     position: relative;
+}
+.member h3 {
+    width: 100%;
+    text-align: start;
 }
 .social-media {
     width: 64px;

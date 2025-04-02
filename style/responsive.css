@@ -1,0 +1,38 @@
+@media screen and (max-width: 1279px) {
+    .footer h3 {
+        font-size: 2em;
+    }
+    .footer p {
+        width: 70%;
+    }
+    .member {
+        width: 45%;
+    }
+}
+@media screen and (max-width: 931px){
+    .footer-credit {
+        width: 96%;
+        gap: 16px;
+    }
+    .member {
+        width: 50%;
+    }
+    #popup-board {
+        width: 616px;
+    }
+    #popup-board div:not(:last-child) {
+        width: 80%;
+    }
+    #popup-board input, #popup-board textarea {
+        width: 100%;
+    }
+    .seperate-bar {
+        width: 100%;
+    }
+    .task-container {
+        width: 672px;
+    }
+    h2 {
+        font-size: 2.5em;
+    }
+}
