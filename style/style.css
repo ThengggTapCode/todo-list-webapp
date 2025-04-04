@@ -341,8 +341,7 @@ textarea::-webkit-scrollbar {
 .footer h3 {
     font-size: 2.2rem;
     font-family: 'Raleway', sans-serif;
-    width: 50%;
-    text-align: center;
+    width: 70%;
 }
 .footer p {
     font-size: 1.4em;
@@ -354,8 +353,8 @@ textarea::-webkit-scrollbar {
 .footer-header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: space-between;
+    width: 90%;
     margin-bottom: 32px;
 }
 .footer-credit {

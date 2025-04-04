@@ -56,6 +56,7 @@ function addTask() {
     const addBtn = document.createElement('button');
     const cancelBtn = document.createElement('button');
     const buttonWrap = document.createElement('div');
+    const inputForm = document.createElement('div');
 
     // show popup
     popupContainer.style.display = 'flex';
@@ -77,7 +78,8 @@ function addTask() {
     titleWrap.style.position = 'relative';
     descWrap.style.position = 'relative';
     newTask.classList.add('task-container');
-
+    inputForm.classList.add('input-form');
+    
     // add input, textarea, buttons to wrap div
     titleWrap.appendChild(title);
     titleWrap.appendChild(titleLengthCount);
@@ -85,11 +87,12 @@ function addTask() {
     descWrap.appendChild(descLengthCount);
     buttonWrap.appendChild(addBtn);
     buttonWrap.appendChild(cancelBtn);
+    inputForm.appendChild(titleWrap);
+    inputForm.appendChild(descWrap);
 
     // add wrap div to popup
     popupBoard.appendChild(popupHeader);
-    popupBoard.appendChild(titleWrap);
-    popupBoard.appendChild(descWrap);
+    popupBoard.append(inputForm);
     popupBoard.appendChild(buttonWrap);
 
     getInput();
@@ -305,6 +308,7 @@ taskList.addEventListener('click', event => {
         confimButton.addEventListener('click', () => {
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
+            const oldTitleText = oldTitle.innerText
 
             if (newTitle !== '' || newDesc !== '') {
                 untitledTask = 0;
@@ -315,7 +319,7 @@ taskList.addEventListener('click', event => {
                     oldDesc.innerText = newDesc;
 
                 // show a new toast notification after edit
-                showToastNotification(`Đã chỉnh sửa "${oldTitle.innerText}"!`, 'fa-pen-to-square', 'green');
+                showToastNotification(`Đã chỉnh sửa "${oldTitleText}"!`, 'fa-pen-to-square', 'green');
             }
 
             // remove elements to close popup
