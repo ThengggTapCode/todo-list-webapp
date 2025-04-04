@@ -545,6 +545,9 @@ function getPreferredTheme() {
     }
 
 }
+const date = new Date();
+document.querySelector('.footer-bottom p').innerHTML = `&copy; ${date.getFullYear()} ThengggTapCode. All rights reserved.`
+
 getInput();
 getTextarea()
 checkTaskCount()

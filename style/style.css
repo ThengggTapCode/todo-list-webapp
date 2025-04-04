@@ -360,7 +360,7 @@ textarea::-webkit-scrollbar {
 .footer-credit {
     display: flex;
     justify-content: center;
-    margin-top: 32px;
+    margin: 32px 0;
     width: 90%;
     justify-content: space-around;
 }
@@ -389,4 +389,16 @@ textarea::-webkit-scrollbar {
 }
 .social-media img {
     width: 64px;
+}
+.footer-bottom {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 32px 0;
+}
+.footer-bottom p {
+    width: 100%;
+    font-size: 1.5em;
 }

@@ -66,4 +66,8 @@
     .task-container p {
         font-size: 1.1em;
     }
+    .footer-bottom p {
+        width: 100%;
+        font-size: 1.2em;
+    }
 }
