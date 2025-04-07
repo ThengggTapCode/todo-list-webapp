@@ -38,6 +38,9 @@ function checkTaskCount() {
 }
 // add task
 function addTask() {
+    if (popupBoard.querySelector('.input-form'))
+        popupBoard.querySelector('.input-form').remove();
+
     const title = document.createElement('input');
     const desc = document.createElement('textarea');
     const titleWrap = document.createElement('div');
@@ -75,6 +78,7 @@ function addTask() {
     cancelBtn.innerText = 'Hủy';
     popupHeader.innerText = 'Thêm nhiệm vụ mới';
     popupHeader.style.textAlign = 'center';
+    popupHeader.classList.add('popup-header')
     titleWrap.style.position = 'relative';
     descWrap.style.position = 'relative';
     newTask.classList.add('task-container');
@@ -173,6 +177,7 @@ function addTask() {
         saveData();
 
         // close popup
+        inputForm.remove();
         popupHeader.remove();
         titleWrap.remove();
         descWrap.remove();
@@ -236,6 +241,10 @@ taskList.addEventListener('click', event => {
 
     // edit task
     if (clickedElement.classList.contains('fa-pen-to-square')) {
+
+        if (popupBoard.querySelector('.input-form'))
+            popupBoard.querySelector('.input-form').remove();
+        
         // make popupContainer visible
         popupContainer.style.display = 'flex';
 
@@ -380,6 +389,9 @@ taskList.addEventListener('click', event => {
     // delete task
     if (clickedElement.classList.contains('fa-trash')) {
 
+        if (popupBoard.querySelector('.input-form'))
+            popupBoard.querySelector('.input-form').remove();
+        
         // create elements for popup
         const popupHeader = document.createElement('h2');
         const buttonWrap = document.createElement('div');
@@ -395,10 +407,7 @@ taskList.addEventListener('click', event => {
         confirmBtn.innerText = 'Xóa';
         cancelBtn.innerText = 'Hủy';
         popupHeader.innerText = `Xóa "${taskTitle.innerText}"?`;
-        popupHeader.style.fontSize = '2em';
-        popupHeader.style.margin = '0 20px';
         popupHeader.style.textAlign = 'center';
-        popupBoard.style.width = '600px';
         popupHeader.classList.add('popup-header');
 
         buttonWrap.appendChild(confirmBtn);
@@ -411,7 +420,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
-            popupBoard.style.width = '700px';
+            // popupBoard.style.width = '700px';
         });
 
         // close popup button -> remove elements to close popup
@@ -419,7 +428,7 @@ taskList.addEventListener('click', event => {
             popupContainer.style.display = 'none';
             buttonWrap.remove();
             popupHeader.remove();
-            popupBoard.style.width = '700px';
+            // popupBoard.style.width = '700px';
         });
 
         // confirm delete task
@@ -439,7 +448,7 @@ taskList.addEventListener('click', event => {
             // show toast notification
             checkTaskCount();
             showToastNotification(`Đã xóa "${taskTitle.innerText}"!`, 'fa-trash', 'green');
-            popupBoard.style.width = '700px';
+            // popupBoard.style.width = '700px';
         });
         return;
     }

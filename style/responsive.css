@@ -18,7 +18,7 @@
         width: 50%;
     }
     #popup-board {
-        width: 616px;
+        width: 664px;
     }
     #popup-board .input-form {
         width: 80%;
@@ -70,4 +70,62 @@
         width: 100%;
         font-size: 1.2em;
     }
+    #popup-board {
+        width: 600px;
+    }
+}
+@media screen and (max-width: 663px) {
+    .footer h3 {
+        font-size: 24px;
+        width: 50%;
+    }
+    .footer-credit {
+        flex-direction: column;
+    }
+    .member {
+        width: 100%;
+    }
+    .member p {
+        width: 90%;
+    }
+    .logo-doan-tinhoctre {
+        height: 70px;
+    }.task-container {
+        width: 500px;
+    }
+    .task-container p {
+        font-size: 20px;
+    }
+    #popup-board {
+        width: 516px;
+        gap: 24px;
+        padding: 32px 0 16px 0;
+    }
+    .popup-header {
+        font-size: 32px;
+    }
+    #close-popup {
+        font-size: 1.8em;
+        top: 20px;
+        right: 20px;
+    }
+    input::placeholder,
+    textarea::placeholder {
+        font-size: 1em;
+    }
+    .toast-container {
+        width: 564px;
+    }
+    .toast-container p {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 48px;
+    }
+    h2 {
+        font-size: 32px;
+    }
+}
+@media screen and (max-width: 563px) {
+
 }
