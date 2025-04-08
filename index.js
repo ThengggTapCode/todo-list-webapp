@@ -41,152 +41,81 @@ function addTask() {
     if (popupBoard.querySelector('.input-form'))
         popupBoard.querySelector('.input-form').remove();
 
-    const title = document.createElement('input');
-    const desc = document.createElement('textarea');
-    const titleWrap = document.createElement('div');
-    const descWrap = document.createElement('div');
-    const titleLengthCount = document.createElement('p');
-    const descLengthCount = document.createElement('p');
-    const newTask = document.createElement('div');
-    const taskTitle = document.createElement('p');
-    const taskDesc = document.createElement('p');
-    const taskInfoWrap = document.createElement('div');
-    const editBtn = document.createElement('i');
-    const pinBtn = document.createElement('i');
-    const deleteBtn = document.createElement('i');
-    const actionBtnWrap = document.createElement('div');
-    const popupHeader = document.createElement('h2');
-    const addBtn = document.createElement('button');
-    const cancelBtn = document.createElement('button');
-    const buttonWrap = document.createElement('div');
-    const inputForm = document.createElement('div');
-
-    // show popup
     popupContainer.style.display = 'flex';
-
-    // styling & attributes
-    title.maxLength = 30;
-    desc.maxLength = 400;
-    title.placeholder = 'Nhập tiêu đề';
-    desc.placeholder = 'Nhập mô tả';
-    title.autocomplete = 'off';
-    titleLengthCount.classList.add('length-count');
-    descLengthCount.classList.add('textarea-length-count');
-    addBtn.id = 'add-task';
-    cancelBtn.classList.add('cancel-button');
-    addBtn.innerText = 'Thêm';
-    cancelBtn.innerText = 'Hủy';
-    popupHeader.innerText = 'Thêm nhiệm vụ mới';
-    popupHeader.style.textAlign = 'center';
-    popupHeader.classList.add('popup-header')
-    titleWrap.style.position = 'relative';
-    descWrap.style.position = 'relative';
-    newTask.classList.add('task-container');
-    inputForm.classList.add('input-form');
-    
-    // add input, textarea, buttons to wrap div
-    titleWrap.appendChild(title);
-    titleWrap.appendChild(titleLengthCount);
-    descWrap.appendChild(desc);
-    descWrap.appendChild(descLengthCount);
-    buttonWrap.appendChild(addBtn);
-    buttonWrap.appendChild(cancelBtn);
-    inputForm.appendChild(titleWrap);
-    inputForm.appendChild(descWrap);
-
-    // add wrap div to popup
-    popupBoard.appendChild(popupHeader);
-    popupBoard.append(inputForm);
-    popupBoard.appendChild(buttonWrap);
+    popupBoard.innerHTML = `
+    <i class="fa-solid fa-xmark" id="close-popup"></i>
+    <h2 class="popup-header" style="text-align: center;">Thêm nhiệm vụ mới</h2>
+    <div class="input-form">
+        <div style="position: relative;">
+            <input maxlength="30" placeholder="Nhập tiêu đề" autocomplete="off">
+            <p class="length-count">0/30</p>
+        </div>
+        <div style="position: relative;">
+            <textarea maxlength="400" placeholder="Nhập mô tả"></textarea>
+            <p class="textarea-length-count">0/400</p>
+        </div>
+    </div>
+    <div>
+        <button id="add-task">Thêm</button>
+        <button class="cancel-button">Hủy</button>
+    </div>
+    `;
 
     getInput();
     getTextarea();
 
     // close popup on cancel button click
-    cancelBtn.addEventListener('click', () => {
-        popupHeader.remove();
-        titleWrap.remove();
-        descWrap.remove();
-        buttonWrap.remove();
-        popupContainer.style.display = 'none';
-    });
+    popupBoard.querySelector('.cancel-button').onclick = closePopupBoard;
 
     // close popup on close popup button click
-    closePopup.addEventListener('click', () => {
-        popupHeader.remove();
-        titleWrap.remove();
-        descWrap.remove();
-        buttonWrap.remove();
-        popupContainer.style.display = 'none';
-    })
-
+    popupBoard.querySelector('#close-popup').onclick = closePopupBoard;
+    
     // add task
-    addBtn.addEventListener('click', () => {
+    popupBoard.querySelector('#add-task').onclick = function() {
+
+        const newTask = document.createElement('div');
+        const title = popupBoard.querySelector('input');
+        const desc = popupBoard.querySelector('textarea');
+        let taskTitle, taskDesc;
+
         // check input vale
         if (title.value === '') {
             untitledTask++;
             saveUntitledCount();
-            taskTitle.innerText = `Không có tiêu đề ${untitledTask}` // default if input is empty
+            taskTitle = `Không có tiêu đề ${untitledTask}` // default if input is empty
         } else {
             untitledTask = 0;
             saveUntitledCount();
-            taskTitle.innerText = title.value.trim(); // set title
+            taskTitle = title.value.trim(); // set title
         }
 
-        taskDesc.innerText = desc.value === '' ? 'Không có mô tả' : desc.value.trim(); // set desc, default if textarea is empty
+        taskDesc = desc.value === '' ? 'Không có mô tả' : desc.value.trim(); // set desc, default if textarea is empty
 
-        // check task button
-        const checkTask = document.createElement('i');
-        checkTask.classList.add('fa-regular', 'fa-circle');
-        newTask.appendChild(checkTask);
-
-        // add info to taskInfo
-        taskTitle.classList.add('task-title');
-        taskDesc.classList.add('task-desc');
-        taskInfoWrap.appendChild(taskTitle);
-        taskInfoWrap.appendChild(taskDesc);
-
-        taskDesc.style.display = 'none';
-
-        // add task info
-        taskInfoWrap.classList.add('task-info');
-        newTask.appendChild(taskInfoWrap);
-
-        // expand task button
-        const expandTask = document.createElement('i');
-        expandTask.classList.add('fa-solid', 'fa-angle-down');
-
-        actionBtnWrap.appendChild(expandTask);
-        // edit button
-        editBtn.classList.add('fa-solid', 'fa-pen-to-square');
-        actionBtnWrap.appendChild(editBtn);
-
-        // pin button
-        pinBtn.classList.add('fa-solid', 'fa-thumbtack');
-        actionBtnWrap.appendChild(pinBtn);
-
-        // delete button
-        deleteBtn.classList.add('fa-solid', 'fa-trash');
-        actionBtnWrap.appendChild(deleteBtn);
-
-        actionBtnWrap.classList.add('action-btn');
-        newTask.appendChild(actionBtnWrap);
-
+        newTask.innerHTML = `
+        <i class="fa-regular fa-circle"></i>
+        <div class="task-info">
+            <p class="task-title">${taskTitle}</p>
+            <p class="task-desc" style="display: none;">${taskDesc}</p>
+        </div>
+        <div class="action-btn">
+            <i class="fa-solid fa-angle-down"></i>
+            <i class="fa-solid fa-pen-to-square"></i>
+            <i class="fa-solid fa-thumbtack"></i>
+            <i class="fa-solid fa-trash"></i>
+        </div>
+        `;
+        newTask.classList.add('task-container');
         // add task to task list
         taskList.appendChild(newTask);
         saveData();
 
         // close popup
-        inputForm.remove();
-        popupHeader.remove();
-        titleWrap.remove();
-        descWrap.remove();
-        buttonWrap.remove();
+        popupBoard.innerHTML = '';
         popupContainer.style.display = 'none';
 
         checkTaskCount();
-        showToastNotification(`Đã thêm "${taskTitle.innerText}"!`, 'fa-note-sticky', 'green');
-    });
+        showToastNotification(`Đã thêm "${taskTitle}"!`, 'fa-note-sticky', 'green');
+    };
 }
 
 // show toast notification
@@ -248,76 +177,41 @@ taskList.addEventListener('click', event => {
         // make popupContainer visible
         popupContainer.style.display = 'flex';
 
-        // create elements for popup
-        const taskTitleInput = document.createElement('input');
-        const titleLengthCount = document.createElement('p');
-        const titleWrap = document.createElement('div');
-        const taskDescInput = document.createElement('textarea');
-        const descWrap = document.createElement('div');
-        const descLengthCount = document.createElement('p');
-        const confimButton = document.createElement('button');
-        const cancelButton = document.createElement('button')
         const oldTitle = taskContainer.querySelector('.task-title');
         const oldDesc = taskContainer.querySelector('.task-desc');
-        const formWrap = document.createElement('div');
-        const buttonWrap = document.createElement('div')
-        const popupHeader = document.createElement('h2');
 
-        // set attributes for elements
-        taskTitleInput.id = 'new-task-title';
-        taskDescInput.id = 'new-task-desc';
-        taskTitleInput.placeholder = 'Nhập tiêu đề mới';
-        taskDescInput.placeholder = 'Nhập mô tả mới';
-        taskTitleInput.maxLength = 30;
-        taskDescInput.maxLength = 400;
-        confimButton.classList.add('confim-button');
-        confimButton.innerText = 'Chỉnh sửa';
-        cancelButton.classList.add('cancel-button');
-        cancelButton.innerText = 'Hủy';
-        popupHeader.innerText = `Chỉnh sửa "${taskTitle.innerText}"`;
-        popupHeader.classList.add('popup-header');
-        popupHeader.style.textAlign = 'center';
-        formWrap.classList.add('input-form');
-        buttonWrap.classList.add('button-wrap');
-        titleWrap.classList.add('title-wrap');
-        descWrap.classList.add('desc-wrap');
-        titleLengthCount.classList.add('length-count');
-        descLengthCount.classList.add('textarea-length-count');
+        popupBoard.innerHTML = `
+        <i class="fa-solid fa-xmark" id="close-popup"></i>
+        <h2 class="popup-header" style="text-align: center;">Chỉnh sửa "${taskTitle.innerText}"</h2>
+        <div class="input-form">
+            <div class="title-wrap">
+                <input id="new-task-title" placeholder="Nhập tiêu đề mới" maxlength="30">
+                <p class="length-count">0/30</p>
+            </div>
+            <div class="desc-wrap">
+                <textarea id="new-task-desc" placeholder="Nhập mô tả mới" maxlength="400"></textarea>
+                <p class="textarea-length-count">0/400</p>
+            </div>
+        </div>
+        <div class="button-wrap">
+            <button class="confirm-button">Chỉnh sửa</button>
+            <button class="cancel-button">Hủy</button>
+        </div>
 
-        // appending elements
-        popupBoard.appendChild(popupHeader);
-        titleWrap.appendChild(taskTitleInput);
-        titleWrap.appendChild(titleLengthCount);
-        descWrap.appendChild(taskDescInput);
-        descWrap.appendChild(descLengthCount);
-        formWrap.appendChild(titleWrap);
-        formWrap.appendChild(descWrap);
-        buttonWrap.appendChild(confimButton);
-        buttonWrap.appendChild(cancelButton);
-        popupBoard.appendChild(formWrap);
-        popupBoard.appendChild(buttonWrap);
-
+        `;
         // cancel button -> remove elements to close popup
-        cancelButton.addEventListener('click', () => {
-            formWrap.remove();
-            buttonWrap.remove();
-            popupHeader.remove();
-            popupContainer.style.display = 'none';
-        });
+        popupBoard.querySelector('.cancel-button').onclick = closePopupBoard;
 
         // close popup button -> remove elements to close popup
-        closePopup.addEventListener('click', () => {
-            formWrap.remove();
-            buttonWrap.remove();
-            popupHeader.remove();
-            popupContainer.style.display = 'none';
-        });
+        popupBoard.querySelector('#close-popup').onclick = closePopupBoard;
 
         // confirm button -> submit new changes
-        confimButton.addEventListener('click', () => {
+        popupBoard.querySelector('.confirm-button').onclick = function() {
+            const taskTitleInput = popupBoard.querySelector('#new-task-title');
+            const taskDescInput = popupBoard.querySelector('#new-task-desc');
             const newTitle = taskTitleInput.value.trim();
             const newDesc = taskDescInput.value.trim();
-            const oldTitleText = oldTitle.innerText
+            const oldTitleText = oldTitle.innerText;
 
             if (newTitle !== '' || newDesc !== '') {
                 untitledTask = 0;
@@ -332,15 +226,13 @@ taskList.addEventListener('click', event => {
             }
 
             // remove elements to close popup
-            formWrap.remove();
-            buttonWrap.remove();
-            popupHeader.remove();
+            popupBoard.innerHTML = '';
             popupContainer.style.display = 'none';
-
-        });
+            
+            saveData();
+        };
         getInput();
         getTextarea();
-        saveData();
         return;
     }
 
@@ -391,48 +283,26 @@ taskList.addEventListener('click', event => {
 
         if (popupBoard.querySelector('.input-form'))
             popupBoard.querySelector('.input-form').remove();
-        
-        // create elements for popup
-        const popupHeader = document.createElement('h2');
-        const buttonWrap = document.createElement('div');
-        const confirmBtn = document.createElement('button');
-        const cancelBtn = document.createElement('button');
 
         // make popupContainer visible
         popupContainer.style.display = 'flex';
 
-        // attributes for elements
-        confirmBtn.classList.add('confirm-button');
-        cancelBtn.classList.add('cancel-button');
-        confirmBtn.innerText = 'Xóa';
-        cancelBtn.innerText = 'Hủy';
-        popupHeader.innerText = `Xóa "${taskTitle.innerText}"?`;
-        popupHeader.style.textAlign = 'center';
-        popupHeader.classList.add('popup-header');
-
-        buttonWrap.appendChild(confirmBtn);
-        buttonWrap.appendChild(cancelBtn);
-        popupBoard.appendChild(popupHeader);
-        popupBoard.append(buttonWrap);
-
+        popupBoard.innerHTML = `
+            <i class="fa-solid fa-xmark" id="close-popup"></i>
+            <h2 class="popup-header" style="text-align: center;">Xóa "${taskTitle.innerText}"?</h2>
+            <div>
+                <button class="confirm-button">Xóa</button>
+                <button class="cancel-button">Hủy</button>
+            </div>
+        `;
         // cancel button -> remove elements to close popup
-        cancelBtn.addEventListener('click', () => {
-            popupContainer.style.display = 'none';
-            buttonWrap.remove();
-            popupHeader.remove();
-            // popupBoard.style.width = '700px';
-        });
+        popupBoard.querySelector('.cancel-button').onclick = closePopupBoard;
 
         // close popup button -> remove elements to close popup
-        closePopup.addEventListener('click', () => {
-            popupContainer.style.display = 'none';
-            buttonWrap.remove();
-            popupHeader.remove();
-            // popupBoard.style.width = '700px';
-        });
+        popupBoard.querySelector('#close-popup').onclick = closePopupBoard;
 
         // confirm delete task
-        confirmBtn.addEventListener('click', () => {
+        popupBoard.querySelector('.confirm-button').onclick = function() {
 
             // delete task
             taskContainer.remove();
@@ -441,15 +311,13 @@ taskList.addEventListener('click', event => {
             saveData();
 
             // remove elements to close popup
+            popupBoard.innerHTML = '';
             popupContainer.style.display = 'none';
-            buttonWrap.remove();
-            popupHeader.remove();
 
             // show toast notification
             checkTaskCount();
             showToastNotification(`Đã xóa "${taskTitle.innerText}"!`, 'fa-trash', 'green');
-            // popupBoard.style.width = '700px';
-        });
+        };
         return;
     }
 
@@ -489,7 +357,10 @@ document.querySelector('#theme-switch').addEventListener('click', event => {
         switchBtn.classList.toggle('fa-moon');
     }
 });
-
+function closePopupBoard() {
+    popupBoard.innerHTML = '';
+    popupContainer.style.display = 'none';
+}
 function getInput() {
     document.querySelectorAll('input').forEach(input => {
         const container = input.parentElement;
