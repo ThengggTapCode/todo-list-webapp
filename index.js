@@ -55,7 +55,7 @@ function addTask() {
             <p class="textarea-length-count">0/400</p>
         </div>
     </div>
-    <div>
+    <div class="button-wrap">
         <button id="add-task">Thêm</button>
         <button class="cancel-button">Hủy</button>
     </div>
@@ -295,6 +295,8 @@ taskList.addEventListener('click', event => {
                 <button class="cancel-button">Hủy</button>
             </div>
         `;
+        popupBoard.classList.add('delete-task-popup');
+        
         // cancel button -> remove elements to close popup
         popupBoard.querySelector('.cancel-button').onclick = closePopupBoard;
 

@@ -61,7 +61,7 @@
         font-size: 1.8em;
     }
     .task-container {
-        width: 564px;
+        width: 632px;
     }
     .task-container p {
         font-size: 1.1em;
@@ -102,7 +102,8 @@
         padding: 32px 0 16px 0;
     }
     .popup-header {
-        font-size: 32px;
+        font-size: 24px;
+        width: 80%;
     }
     #close-popup {
         font-size: 1.8em;
@@ -114,10 +115,16 @@
         font-size: 1em;
     }
     .toast-container {
-        width: 564px;
+        width: 90%;
+        margin-right: 10px;
     }
     .toast-container p {
         font-size: 20px;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        width: 65%;
     }
     h1 {
         font-size: 48px;
@@ -125,7 +132,67 @@
     h2 {
         font-size: 32px;
     }
+    .task-container .task-title,
+    .task-container.expanded .task-title {
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        width: 75%;
+        padding: 8px 0;
+    }
+    .expanded .task-title {
+        margin-bottom: 8px;
+    }
+    .task-container .task-desc,
+    .expanded .task-desc {
+        width: 95%;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    #popup-board.delete-task-popup {
+        width: 464px;
+    }
 }
 @media screen and (max-width: 563px) {
+    .app {
+        padding: 0 32px 64px 32px;
+    }
+    .member h3 {
+        font-size: 20px;
+    }
+    .member p {
+        font-size: 20px;
+    }
+    #task-list {
+        width: 95%;
+    }
+    .task-container {
+        width: 100%;
+        font-size: 1em;
+    }
 
+    #popup-board {
+        width: 90%;
+    }
+    #close-popup {
+        font-size: 1.2em;
+    }
+    button {
+        padding: 16px 32px;
+        font-size: 1.25em;
+    }
+    .button-wrap {
+        gap: 48px;
+    }
+    .task-container .task-title,
+    .task-container.expanded .task-title {
+        width: 67%;
+    }
+    .toast-container {
+        width: 90%;
+        font-size: 1.2em;
+    }
 }
