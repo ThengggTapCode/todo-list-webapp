@@ -256,6 +256,7 @@
     }
     .member p {
         font-size: 18px;
+        width: 80%;
     }
     .member img {
         width: 40px;
