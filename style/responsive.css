@@ -73,6 +73,12 @@
     #popup-board {
         width: 600px;
     }
+    #popup-board.delete-task-popup {
+        width: 600px;
+    }
+    .notaskfound-title {
+        text-align: center;
+    }
 }
 @media screen and (max-width: 663px) {
     .footer h3 {
@@ -99,10 +105,13 @@
     #popup-board {
         width: 516px;
         gap: 24px;
-        padding: 32px 0 16px 0;
+        padding: 48px 0 32px 0;
+    }
+    #popup-board.delete-task-popup {
+        padding: 48px 0 16px 0;
     }
     .popup-header {
-        font-size: 24px;
+        font-size: 32px;
         width: 80%;
     }
     #close-popup {
@@ -116,6 +125,7 @@
     }
     .toast-container {
         width: 90%;
+        height: 100px;
         margin-right: 10px;
     }
     .toast-container p {
@@ -155,8 +165,17 @@
     #popup-board.delete-task-popup {
         width: 464px;
     }
+    input, textarea {
+        font-size: 1.25em;
+    }
 }
 @media screen and (max-width: 563px) {
+    h1 {
+        font-size: 40px;
+    }
+    .header h2 {
+        font-size: 30px;
+    }
     .app {
         padding: 0 32px 64px 32px;
     }
@@ -173,9 +192,8 @@
         width: 100%;
         font-size: 1em;
     }
-
     #popup-board {
-        width: 90%;
+        width: 85%;
     }
     #close-popup {
         font-size: 1.2em;
@@ -194,5 +212,56 @@
     .toast-container {
         width: 90%;
         font-size: 1.2em;
+    }
+    input, textarea {
+        font-size: 1em;
+    }
+    .footer-header img {
+        height: 54px;
+    }
+    #popup-board.delete-task-popup {
+        width: 90%;
+    }
+    .popup-header {
+        font-size: 24px;
+    }
+    #theme-switch {
+        font-size: 1.3em;
+        top: 8px;
+        left: 8px;
+        padding: 28px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    #popup-board {
+        width: 95%;
+    }
+    #popup-board .input-form {
+        width: 85%;
+    }
+    .popup-header {
+        font-size: 20px;
+    }
+    .task-container .task-title,
+    .task-container.expanded .task-title {
+        width: 54%;
+    }
+    .footer-header {
+        flex-direction: column-reverse;
+        gap: 32px;
+    }
+    .footer h3 {
+        width: 100%;
+    }
+    .member p {
+        font-size: 18px;
+    }
+    .member img {
+        width: 40px;
+        height: 40px;
+    }
+    button {
+        font-size: 1em;
     }
 }

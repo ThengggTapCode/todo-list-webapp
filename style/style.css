@@ -150,7 +150,10 @@ p.task-desc {
     position: fixed;
     padding: 64px 0 32px 0;
 }
-
+#popup-board.delete-task-popup {
+    width: 664px;
+    padding: 64px 32px 32px 32px;
+}
 #close-popup {
     font-size: 2em;
     position: absolute;
@@ -205,9 +208,9 @@ textarea {
 
 textarea {
     resize: vertical;
-    max-height: 230px;
+    max-height: 224px;
     min-height: 51px;
-    height: 115px;
+    height: 116px;
 }
 
 button {

@@ -38,9 +38,6 @@ function checkTaskCount() {
 }
 // add task
 function addTask() {
-    if (popupBoard.querySelector('.input-form'))
-        popupBoard.querySelector('.input-form').remove();
-
     popupContainer.style.display = 'flex';
     popupBoard.innerHTML = `
     <i class="fa-solid fa-xmark" id="close-popup"></i>
@@ -170,9 +167,6 @@ taskList.addEventListener('click', event => {
 
     // edit task
     if (clickedElement.classList.contains('fa-pen-to-square')) {
-
-        if (popupBoard.querySelector('.input-form'))
-            popupBoard.querySelector('.input-form').remove();
         
         // make popupContainer visible
         popupContainer.style.display = 'flex';
@@ -281,9 +275,6 @@ taskList.addEventListener('click', event => {
     // delete task
     if (clickedElement.classList.contains('fa-trash')) {
 
-        if (popupBoard.querySelector('.input-form'))
-            popupBoard.querySelector('.input-form').remove();
-
         // make popupContainer visible
         popupContainer.style.display = 'flex';
 
@@ -315,6 +306,8 @@ taskList.addEventListener('click', event => {
             // remove elements to close popup
             popupBoard.innerHTML = '';
             popupContainer.style.display = 'none';
+            popupBoard.classList.remove('delete-task-popup');
+
 
             // show toast notification
             checkTaskCount();
