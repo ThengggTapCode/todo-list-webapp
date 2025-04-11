@@ -231,6 +231,12 @@
         left: 8px;
         padding: 28px;
     }
+    p.notaskfound-title {
+        font-size: 24px;
+    }
+    .submit-task {
+        padding: 16px 32px;
+    }
 }
 
 @media screen and (max-width: 479px) {
@@ -264,5 +270,8 @@
     }
     button {
         font-size: 1em;
+    }
+    p.notaskfound-title {
+        font-size: 20px;
     }
 }
